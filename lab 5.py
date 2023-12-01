@@ -12,7 +12,6 @@ def is_prime(p):
     return d * d > p
 
 
-
 def simple_number_p_q(p, q):
     while not is_prime(p) or not is_prime(q):
         p = randint (100000000000, 500000000000)  # после 14 знаков начинает работать очень медленно
