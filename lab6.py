@@ -135,4 +135,5 @@ if __name__ == "__main__":
     sign(11, 3, 0, 255, hash_2, text_2, key = 'secret')  # При g = 0 включается генератор!
     separator()
     exit()
+
 exit()
