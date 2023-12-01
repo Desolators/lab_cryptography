@@ -87,6 +87,7 @@ def sign(p, x, g, k, hash_, text, key):
         hash_again = int(sha512(text.encode("utf-8")).hexdigest(), 16) % 10 ** 5
     elif g != 0 and key == 'secret':  # при этом условии берем значения из входа функции
         secrets = k
+        print(f"Скрытое сообщние = {secrets}")
         y = create_y(g, x, p)
         r = pow(g, secrets, p)
         s = (hash_ - x * r) * pow(secrets, -1, p - 1) % (p - 1)
