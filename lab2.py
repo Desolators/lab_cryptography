@@ -17,6 +17,7 @@ for i in range(len(shifr)):
     freq[column_number][index] += 1
     lens[column_number] += 1
 
+
 count_sdvig = [[0] for i in range(key - 1)]
 umnoz_so_sdvigom = [[0] * len(alp) for i in range(key)]
 for k in range(len(umnoz_so_sdvigom) - 1):
