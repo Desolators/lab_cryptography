@@ -9,7 +9,7 @@ def separator():
 
 def is_prime(n):
     d = 2
-    while d * d <= n and n % d != 0:
+    while d * d <= n and n % d:
         d += 1
     return d * d > n
 
