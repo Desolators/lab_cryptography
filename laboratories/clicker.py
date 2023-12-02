@@ -15,12 +15,12 @@ def click(x, y):
     time.sleep(0.02)
 
 
-def click_0(x, y):
+def click_1(x, y):
     cursor_pos(x, y)
     click(x, y)
 
 
-def click_1(x, y):
+def double_click(x, y):
     cursor_pos(x, y)
     click(x, y)
     click(x, y)
@@ -69,16 +69,16 @@ a = [0] * key
 show_window("Дифференциальный криптоанализ")  # Дифференциальный/Линейный
 
 for j in range(key):
-    click_0(coords_x() + 39 + (28 * j), coords_y() + 454)  # coords_y() + 388 (Линейный) + 454 (Дифф)
+    click_1(coords_x() + 39 + (28 * j), coords_y() + 454)  # coords_y() + 388 (Линейный) + 454 (Дифф)
 
 for k in range(2 ** (len(a))):
     j = len(a) - 1
     while j >= 0 and a[j] == 1:
         a[j] = 0
-        click_1(coords_x() + 39 + (28 * j), coords_y() + 454)  # coords_y() + 388 (Линейный) + 454 (Дифф)
+        double_click(coords_x() + 39 + (28 * j), coords_y() + 454)  # coords_y() + 388 (Линейный) + 454 (Дифф)
         j -= 1
     if j >= 0 and a[j] == 0:
         a[j] = 1
-        click_0(coords_x() + 39 + (28 * j), coords_y() + 454)  # coords_y() + 388 (Линейный) + 454 (Дифф)
+        click_1(coords_x() + 39 + (28 * j), coords_y() + 454)  # coords_y() + 388 (Линейный) + 454 (Дифф)
     window_checker("ошибка", "информация", coords_x() + 80, coords_y() + 619)
     # window_checker coords_y() + 571 (Линейный) + 619 (Дифф)
