@@ -45,15 +45,13 @@ def open_key_search(fn, e):
 
 
 def alg_fact_ferma(N):
-    if N % 2 != 0:
-        a_square = ceil(sqrt(N))
-        while sqrt((a_square * a_square) - N) % 1 > 0:
-            a_square += 1
-        a = int(a_square - sqrt((a_square * a_square) - N))
-        b = int(a_square + sqrt((a_square * a_square) - N))
-        return a, b
-    else:
-        return "Error, even number"
+    assert N % 2 == 1
+    a_square = ceil(sqrt(N))
+    while sqrt((a_square * a_square) - N) % 1 > 0:
+        a_square += 1
+    a = int(a_square + sqrt((a_square * a_square) - N))
+    b = int(a_square - sqrt((a_square * a_square) - N))
+    return a, b
 
 
 def encryption(x, *args, key):
