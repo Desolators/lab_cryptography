@@ -20,18 +20,16 @@ def simple_number_p_q(p, q):
 
 
 def gcd(a, b):
-    x_0, y_0 = 1, 0
-    x_1, y_1 = 0, 1
-    if a < b:
+    if a > b:
         a, b = b, a
-    for k in range(a):
-        if a % b != 0:
-            c = a // b
-            a, b = b, a % b
-            x_0, x_1 = x_1, x_0 - c * x_1
-            y_0, y_1 = y_1, y_0 - c * y_1
-        else:
-            return b, x_1, y_1
+    u = (a, 1, 0)
+    v = (b, 0, 1)
+    while v[0]:
+        q = u[0] / v[0]
+        t = (u[0] % v[0], u[1] - q * v[1], u[2] - q * v[2])
+        u = v
+        v = t
+    return u
 
 
 def open_key_search(fn, e):
