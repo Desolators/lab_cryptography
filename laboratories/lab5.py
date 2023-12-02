@@ -46,7 +46,7 @@ def open_key_search(fn, e):
 
 def alg_fact_ferma(N):
     if N % 2 != 0:
-        a_square = ceil((pow(N, 0.5)))
+        a_square = ceil(sqrt(N))
         while sqrt((a_square * a_square) - N) % 1 > 0:
             a_square += 1
         a = int(a_square - sqrt((a_square * a_square) - N))
