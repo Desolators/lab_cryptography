@@ -23,8 +23,7 @@ def simple_number_p(p):
 def primitive_root(p):
     g = randint(2, simple_number_p(4))
     fn = (p - 1)
-    condition = fn // 2
-    while pow(g, condition, p) == 1:
+    while pow(g, fn // 2, p) == 1:
         g += 1
     return g
 
@@ -92,14 +91,12 @@ def sign(p, x, g, k, hash_, text, key):
         r = pow(g, secrets, p)
         s = (hash_ - x * r) * pow(secrets, -1, p - 1) % (p - 1)
     print(f"Закрытый ключ (x) = {x}")
-    open_key = p, g, y
-    print(f"Открытый ключ (p, g, y) = {open_key} ")
+    print(f"Открытый ключ (p, g, y) = {p, g, y}")
     print(f"Хеш = {hash_}")
     separator()
     # Начинаем формирование цифровой подписи
     print(f"{k = }, {r = }, Обратный элемент k = {pow(k, -1, p - 1)}, {s = } ")
-    signs = text, r, s
-    print("Цифровая подпись (Сообщение, r, s) = ", signs)
+    print("Цифровая подпись (Сообщение, r, s) = ", text, r, s)
     separator()
     # Проверяем подлинность подписи
     print("Проверка подписи: ")
@@ -133,6 +130,6 @@ if __name__ == "__main__":
     text_2 = "Privet"
     print(f'Наш текст, для которого применяем электронную подпись: {text_2}')
     hash_2 = int(sha512(text_2.encode("utf-8")).hexdigest(), 16) % 10 ** 5
-    sign(11, 3, 0, 255, hash_2, text_2, key='secret')  # При g = 0 включается генератор!
+    sign(11, 3, 0, 2155, hash_2, text_2, key='secret')  # При g = 0 включается генератор!
     separator()
     exit()
