@@ -5,6 +5,8 @@ import win32api
 import win32con
 
 
+# Hello, Дарова, Глеб!!
+
 def cursor_pos(x, y):
     win32api.SetCursorPos((x, y))
 
