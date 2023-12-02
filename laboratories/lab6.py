@@ -15,7 +15,7 @@ def is_prime(n, d = 2):
 
 def simple_number_p(p):
     while not is_prime(p):
-        p = randint(25000000, 55000000)
+        p = randint(25_000_000, 55_000_000)
     return p
 
 
@@ -129,6 +129,6 @@ if __name__ == "__main__":
     text_2 = "Privet"
     print(f'Наш текст, для которого применяем электронную подпись: {text_2}')
     hash_2 = int(sha512(text_2.encode("utf-8")).hexdigest(), 16) % 10 ** 5
-    sign(11, 3, 0, 2155, hash_2, text_2, key='secret')  # При g = 0 включается генератор!
+    sign(11, 3, 0, 2_155, hash_2, text_2, key='secret')  # При g = 0 включается генератор!
     separator()
     exit()
