@@ -1,9 +1,10 @@
-shifr = ("wofuqmoxgsokucfvhhrntzhreccilccurihktfkzivvzhkwwtobuwwgklcqyxzritbhytpcplogtpzzvsvoehszrcrhytuwiaufviszytvouawhkashfqwhvpbrkdpfvpyoescbttkvvcufvphrvpfhyuszcdbhytzoesvs"
-         "tdizucczfcusiefctjfsvksbupwzpqfsrsbcnlvsewshydiuyicjvghvzhpmexuvkxbvzhpsupbrkdggvsopfjhwewwgrclwvimvvvfcrcsrrcrgrxrhfwwgnxtsnwohzhhcstqcdtctlhvcnpfsnthcwtsrfjfdfdfqyx"
-         "zritbkytbkvcczfcusiwojvpbmkwwbxtjseucffjfgvajsjxzzktzzpdikyphvlhpoesobjlsfvshvvlcarcsoiamhfbcfidkafgbwevksnxzzkpyskwsqyxzritbcliwbkdhvvucfvhhhflvsitwhzhhvvivwtzsgkivsitksnxzz"
-         "cxuvkptwittciivsdpbrxxjsvpqvfuhvvbcbvbcfvewsttctsgsoupbrkwsbntkwcauckdciilcfbpbrctojvivsdpzcethvvnkwcabckuwbuivsnpmvfbsoxpwbrcrkvhvocapsixrcwivsdcckzusgrxrhytaoexkwcabckschyp"
-         "hvflqoexpsrghcctojvbmqyxzritbocdbszchvvucfvhhhytkwcsobzbozjlcicsgcfcqcdtobuisoiivsdicdztqsjdmcluccchowuhvskwsbntaijiozcuciiswsfuvievsfpdiarnogntzzgaobvivsgaobbhtcidiftdttzcgo"
-         "esgvvastkwwaeddsrrsieiwzytqcehsbktrpliwtvtzjvgmgfgfmwdfhytdcfgqvzarfvcozcivsjpasjpwrkwsarc")
+shifr = (
+    "wofuqmoxgsokucfvhhrntzhreccilccurihktfkzivvzhkwwtobuwwgklcqyxzritbhytpcplogtpzzvsvoehszrcrhytuwiaufviszytvouawhkashfqwhvpbrkdpfvpyoescbttkvvcufvphrvpfhyuszcdbhytzoesvs"
+    "tdizucczfcusiefctjfsvksbupwzpqfsrsbcnlvsewshydiuyicjvghvzhpmexuvkxbvzhpsupbrkdggvsopfjhwewwgrclwvimvvvfcrcsrrcrgrxrhfwwgnxtsnwohzhhcstqcdtctlhvcnpfsnthcwtsrfjfdfdfqyx"
+    "zritbkytbkvcczfcusiwojvpbmkwwbxtjseucffjfgvajsjxzzktzzpdikyphvlhpoesobjlsfvshvvlcarcsoiamhfbcfidkafgbwevksnxzzkpyskwsqyxzritbcliwbkdhvvucfvhhhflvsitwhzhhvvivwtzsgkivsitksnxzz"
+    "cxuvkptwittciivsdpbrxxjsvpqvfuhvvbcbvbcfvewsttctsgsoupbrkwsbntkwcauckdciilcfbpbrctojvivsdpzcethvvnkwcabckuwbuivsnpmvfbsoxpwbrcrkvhvocapsixrcwivsdcckzusgrxrhytaoexkwcabckschyp"
+    "hvflqoexpsrghcctojvbmqyxzritbocdbszchvvucfvhhhytkwcsobzbozjlcicsgcfcqcdtobuisoiivsdicdztqsjdmcluccchowuhvskwsbntaijiozcuciiswsfuvievsfpdiarnogntzzgaobvivsgaobbhtcidiftdttzcgo"
+    "esgvvastkwwaeddsrrsieiwzytqcehsbktrpliwtvtzjvgmgfgfmwdfhytdcfgqvzarfvcozcivsjpasjpwrkwsarc")
 key = int(input("Enter key: "))
 alp = "abcdefghijklmnopqrstuvwxyz"
 stolbez = [[] for i in range(key)]
@@ -16,7 +17,6 @@ for i in range(len(shifr)):
     stolbez[column_number].append(shifr[i])
     freq[column_number][index] += 1
     lens[column_number] += 1
-
 
 count_sdvig = [[0] for i in range(key - 1)]
 umnoz_so_sdvigom = [[0] * len(alp) for i in range(key)]
