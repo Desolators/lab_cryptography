@@ -78,22 +78,22 @@ def encryption(x, *args, key):
         N = p * q
         fn = (p - 1) * (q - 1)
         print(f"{p = }, {q = }, {N = }, φ(N) = {fn}")
-        e_d = keys_automate(fn)
-        y = pow(x, e_d[0], N)
+        e1, d1, e2 = keys_automate(fn)
+        y = pow(x, e1, N)
         print(f"X = {x}")
         print(f"Y = {y} ")
-        return y, e_d[0], e_d[1], e_d[2], N
+        return y, e1, d1, e2, N
 
     if key == "rand":
         p, q = args
         N = p * q
         print(f"{p = }, {q = }, {N = }")
-        e_d = keys_p_q_rand(p, q)
-        print(f"d = {e_d[1]}")
+        e1, d1, e2 = keys_p_q_rand(p, q)
+        print(f"d = {d1}")
         print(f"X = {x}")
-        y1, y2 = pow(x, e_d[0], N), pow(x, e_d[2], N)
+        y1, y2 = pow(x, e1, N), pow(x, e2, N)
         print(f"Y1 = {y1}, Y2 = {y2}")
-        return y1, e_d[0], e_d[1], e_d[2], y2, N
+        return y1, e1, d1, e2, y2, N
 
 
 def keys_automate(fn):
