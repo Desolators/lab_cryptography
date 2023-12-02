@@ -23,7 +23,7 @@ def simple_number_p(p):
 def primitive_root(p):
     g = randint(2, simple_number_p(4))
     fn = (p - 1)
-    condition = int(fn / 2)
+    condition = fn // 2
     while pow(g, condition, p) == 1:
         g += 1
     return g

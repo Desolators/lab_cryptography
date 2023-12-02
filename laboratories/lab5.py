@@ -1,4 +1,5 @@
 from random import randint
+from math import floor
 
 
 def separator():
@@ -46,22 +47,11 @@ def alg_fact_ferma(N):
     if N % 2 == 0:
         return "Error, even number"
     else:
-        square_numb = 0
-        k = 0
-        while square_numb < N:
-            k += 1
-            square_numb = pow(k, 2)
-
-        search_numb = pow((square_numb - N), 0.5)
-
-        while search_numb % 1 > 0:
-            k += 1
-            square_numb = pow(k, 2)
-            search_numb = pow((square_numb - N), 0.5)
-
-        sqrt = pow(square_numb, 0.5)
-        a = int(sqrt - search_numb)
-        b = int(sqrt + search_numb)
+        square = floor((pow(N, 0.5)) + 1)
+        while pow(((square * square) - N), 0.5) % 1 > 0:
+            square += 1
+        a = int(square - pow(((square * square) - N), 0.5))
+        b = int(square + pow(((square * square) - N), 0.5))
         return a, b
 
 
