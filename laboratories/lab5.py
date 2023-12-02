@@ -196,7 +196,7 @@ if __name__ == '__main__':
     re_encryption(42, 3, 3403)  # y, e, N
     separator()
     separator()
-    print("НАЧАЛО ТЕСТОВ: ")
+    print("НАЧАЛО ТЕСТОВ:")
     separator()
     separator()
     test = encryption(543, 1874947153801, 2797477623911, key="automate")  # x, p, q
