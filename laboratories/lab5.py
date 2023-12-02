@@ -7,8 +7,7 @@ def separator():
     return print("----------------------------------------------------")
 
 
-def is_prime(p):
-    d = 2
+def is_prime(p, d = 2):
     while d * d <= p and p % d:
         d += 1
     return d * d > p
@@ -123,8 +122,7 @@ def decryption(y, d, N):
     return x
 
 
-def re_encryption(y, e, N):
-    x0 = 2
+def re_encryption(y, e, N, x0 = 2):
     print(f"Y = {y}, {e = }, {N = }")
     while pow(x0, e, N) != y:
         x0 += 1
