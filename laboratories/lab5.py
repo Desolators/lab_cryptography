@@ -22,8 +22,7 @@ def simple_number_p_q(p, q):
 
 
 def gcd(a, b):
-    x_0, y_0 = 1, 0
-    x_1, y_1 = 0, 1
+    x_0, x_1, y_0, y_1 = 1, 0, 0, 1
     if a < b:
         a, b = b, a
     for k in range(a):
