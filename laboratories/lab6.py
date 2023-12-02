@@ -7,8 +7,7 @@ def separator():
     return print("----------------------------------------------------")
 
 
-def is_prime(n):
-    d = 2
+def is_prime(n, d = 2):
     while d * d <= n and n % d:
         d += 1
     return d * d > n
