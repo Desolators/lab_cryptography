@@ -48,8 +48,8 @@ def alg_fact_ferma(N):
         a_square = ceil((pow(N, 0.5)))
         while (((a_square * a_square) - N) ** 0.5) % 1 > 0:
             a_square += 1
-        a = int(a_square - (((a_square * a_square) - N) ** 0.5))
-        b = int(a_square + (((a_square * a_square) - N) ** 0.5))
+        a = int(a_square - ((a_square * a_square) - N) ** 0.5)
+        b = int(a_square + ((a_square * a_square) - N) ** 0.5)
         return a, b
     else:
         return "Error, even number"
