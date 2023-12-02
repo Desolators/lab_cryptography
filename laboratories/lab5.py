@@ -29,8 +29,7 @@ def gcd(a, b):
         if a % b != 0:
             c = a // b
             a, b = b, a % b
-            x_0, x_1 = x_1, x_0 - c * x_1
-            y_0, y_1 = y_1, y_0 - c * y_1
+            x_0, x_1, y_0, y_1 = x_1, (x_0 - c * x_1), y_1, (y_0 - c * y_1)
         else:
             return b, x_1, y_1
 
