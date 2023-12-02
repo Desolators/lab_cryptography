@@ -33,11 +33,9 @@ def gcd(a, b):
 
 
 def open_key_search(fn, e):
-    while e != fn - 2:
-        if gcd(fn, e)[0] == 1:
-            return e
-        else:
-            e += 1
+    while gcd(fn, e)[0] != 1:
+        e += 1
+    return e
 
 
 def alg_fact_ferma(N):
