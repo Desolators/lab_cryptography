@@ -213,7 +213,6 @@ if __name__ == '__main__':
     y1_test, e1_test, d1_test, e2_test, y2_test, N_test = rand_cypher_e_d
     decryption(y1_test, d1_test, N_test)
     separator()
-    separator()
     keyless_reading(y1_test, y2_test, e1_test, e2_test, N_test)
     separator()
     exit()
