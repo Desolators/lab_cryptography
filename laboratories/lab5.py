@@ -1,5 +1,5 @@
 from random import randint
-from math import floor
+from math import ceil
 
 
 def separator():
@@ -44,15 +44,15 @@ def open_key_search(fn, e):
 
 
 def alg_fact_ferma(N):
-    if N % 2 == 0:
-        return "Error, even number"
-    else:
-        square = floor((pow(N, 0.5)) + 1)
-        while pow(((square * square) - N), 0.5) % 1 > 0:
+    if N % 2 != 0:
+        square = ceil((pow(N, 0.5)))
+        while (((square * square) - N) ** 0.5) % 1 > 0:
             square += 1
-        a = int(square - pow(((square * square) - N), 0.5))
-        b = int(square + pow(((square * square) - N), 0.5))
+        a = int(square - (((square * square) - N) ** 0.5))
+        b = int(square + (((square * square) - N) ** 0.5))
         return a, b
+    else:
+        return "Error, even number"
 
 
 def encryption(x, *args, key):
