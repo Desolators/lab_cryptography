@@ -41,6 +41,7 @@ def open_key_search(fn, e):
         else:
             e += 1
 
+
 def alg_fact_ferma(N):
     if N % 2 == 0:
         return "Error, even number"
