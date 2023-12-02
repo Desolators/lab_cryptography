@@ -1,6 +1,7 @@
 from math import ceil
 from math import sqrt
 from random import randint
+from typing import Tuple
 
 
 def separator():
@@ -40,7 +41,7 @@ def open_key_search(fn, e):
     return e
 
 
-def alg_fact_ferma(n: int) -> int:
+def alg_fact_ferma(n: int) -> tuple[int, int]:
     assert n % 2 == 1   # number must be odd
     k = ceil(sqrt(n))
     z = 1
