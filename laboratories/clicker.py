@@ -5,9 +5,6 @@ import win32api
 import win32con
 
 
-# Hello
-
-
 def cursor_pos(x, y):
     win32api.SetCursorPos((x, y))
 
@@ -23,7 +20,7 @@ def click_0(x, y):
     click(x, y)
 
 
-def double_click(x, y):
+def click_1(x, y):
     cursor_pos(x, y)
     click(x, y)
     click(x, y)
@@ -78,7 +75,7 @@ for k in range(2 ** (len(a))):
     j = len(a) - 1
     while j >= 0 and a[j] == 1:
         a[j] = 0
-        double_click(coords_x() + 39 + (28 * j), coords_y() + 454)  # coords_y() + 388 (Линейный) + 454 (Дифф)
+        click_1(coords_x() + 39 + (28 * j), coords_y() + 454)  # coords_y() + 388 (Линейный) + 454 (Дифф)
         j -= 1
     if j >= 0 and a[j] == 0:
         a[j] = 1
