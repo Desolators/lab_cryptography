@@ -5,7 +5,6 @@ import win32api
 import win32con
 
 
-
 def cursor_pos(x, y):
     win32api.SetCursorPos((x, y))
 
