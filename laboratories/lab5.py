@@ -70,7 +70,7 @@ def encryption(x, *args, key):
         e, N = args
         print(f"X = {x}, {e = }, {N = }")
         y = pow(x, e, N)
-        print(f"Y = {y} ")
+        print(f"Ответ: Y = {y} ")
         return y, e
 
     if key == "automate":
@@ -126,7 +126,7 @@ def keys_ferma(e, N):
     print(f"p = {p_q[0]}, q = {p_q[1]}, {N = }, φ(N) = {fn}")
     print(f"{e = }")
     d = pow(e, -1, fn)
-    print(f"{d = }")
+    print(f"Ответ: {d = }")
     return d
 
 
@@ -141,7 +141,7 @@ def re_encryption(y, e, N):
     print(f"Y = {y}, {e = }, {N = }")
     while pow(x0, e, N) != y:
         x0 += 1
-    print(f"Методом перешифрования получаем исходный текст x: {x0}")
+    print(f"Методом перешифрования получаем исходный текст, Ответ x = {x0}")
     return x0
 
 
@@ -150,7 +150,7 @@ def re_encryption_or_krmd(y_0, e, N):
     y = y_0
     while y_0 != pow(y, e, N):
         y = (pow(y, e, N))
-    print(f"X (методом перешифрования или бесключевое чтение с одним открытым ключом) = {y}")
+    print(f"(методом перешифрования или бесключевое чтение с одним открытым ключом) Ответ: X = {y}")
     return y
 
 
@@ -162,7 +162,7 @@ def keyless_reading(y1, y2, e1, e2, N):
         r, s = s, r
     print(f"{r = }, {s = }")
     x = pow(y1, r, N) * pow(y2, s, N) % N
-    print(f"(методом бесключевого чтения) X = {x}")
+    print(f"(методом бесключевого чтения) Ответ: X = {x}")
     return x
 
 
