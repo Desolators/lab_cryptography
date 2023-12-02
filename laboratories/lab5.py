@@ -1,3 +1,5 @@
+from math import ceil
+from math import sqrt
 from random import randint
 
 
@@ -38,27 +40,17 @@ def open_key_search(fn, e):
     return e
 
 
-def alg_fact_ferma(N):
-    if N % 2 == 0:
-        return "Error, even number"
-    else:
-        square_numb = 0
-        k = 0
-        while square_numb < N:
-            k += 1
-            square_numb = pow(k, 2)
-
-        search_numb = pow((square_numb - N), 0.5)
-
-        while search_numb % 1 > 0:
-            k += 1
-            square_numb = pow(k, 2)
-            search_numb = pow((square_numb - N), 0.5)
-
-        sqrt = pow(square_numb, 0.5)
-        a = int(sqrt - search_numb)
-        b = int(sqrt + search_numb)
-        return a, b
+def alg_fact_ferma(n: int) -> int:
+    assert n % 2 == 1   # number must be odd
+    k = ceil(sqrt(n))
+    z = 1
+    y = 0
+    while y * y != z:
+        z = k * k - n
+        y = int(sqrt(z))
+        k += 1
+    k -= 1
+    return k - y, k + y
 
 
 def encryption(x, *args, key):
