@@ -137,12 +137,12 @@ def decryption(y, d, N):
 
 
 def re_encryption(y, e, N):
-    x0 = 2
+    x_0 = 2
     print(f"Y = {y}, {e = }, {N = }")
-    while pow(x0, e, N) != y:
-        x0 += 1
-    print(f"Методом перешифрования получаем исходный текст x: {x0}")
-    return x0
+    while pow(x_0, e, N) != y:
+        x_0 += 1
+    print(f"Методом перешифрования получаем исходный текст x: {x_0}")
+    return x_0
 
 
 def re_encryption_or_krmd(y_0, e, N):
