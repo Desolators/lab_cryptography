@@ -4,7 +4,7 @@ from math import gcd
 
 
 def separator():
-    return print ("----------------------------------------------------")
+    return print("----------------------------------------------------")
 
 
 def is_prime(n):
@@ -37,7 +37,7 @@ def generate_p_x():
 
 def create_y(g, x, p):
     y = pow(g, x, p)
-    print (f"{y = }, {g = }, {p = }, {x = }")
+    print(f"{y = }, {g = }, {p = }, {x = }")
     return y
 
 
@@ -64,7 +64,7 @@ def sign(p, x, g, k, hash_, text, key):
     separator()
     hash_again = hash_
     y, r, s = 0, 0, 0
-    ok = u'\u2713'   # значок галочки
+    ok = u'\u2713'  # значок галочки
     # Задаем стартовые значения (формируем ключи)
     if g == 0 and key == 'no_secret':  # при этом условии включаем генератор и используем без секретного сообщения
         p, x = generate_p_x()
@@ -78,9 +78,9 @@ def sign(p, x, g, k, hash_, text, key):
         y = create_y(g, x, p)
         r = pow(g, k, p)
         s = (hash_ - x * r) * pow(k, -1, p - 1) % (p - 1)
-    if g == 0 and key == 'secret':   #  включаем генератор и используем в качестве K - секретное сообщение
+    if g == 0 and key == 'secret':  # включаем генератор и используем в качестве K - секретное сообщение
         secrets = k
-        print (f"Скрытое сообщние = {secrets}")
+        print(f"Скрытое сообщние = {secrets}")
         generator = hash_p_x_simple_generator(hash_, secrets)
         p, x, g, r, s = generator
         y = create_y(g, x, p)
@@ -91,21 +91,21 @@ def sign(p, x, g, k, hash_, text, key):
         y = create_y(g, x, p)
         r = pow(g, secrets, p)
         s = (hash_ - x * r) * pow(secrets, -1, p - 1) % (p - 1)
-    print (f"Закрытый ключ (x) = {x}")
+    print(f"Закрытый ключ (x) = {x}")
     open_key = p, g, y
-    print (f"Открытый ключ (p, g, y) = {open_key} ")
-    print (f"Хеш = {hash_}")
+    print(f"Открытый ключ (p, g, y) = {open_key} ")
+    print(f"Хеш = {hash_}")
     separator()
     # Начинаем формирование цифровой подписи
-    print (f"{k = }, {r = }, Обратный элемент k = {pow(k, -1, p - 1)}, {s = } ")
+    print(f"{k = }, {r = }, Обратный элемент k = {pow(k, -1, p - 1)}, {s = } ")
     signs = text, r, s
-    print ("Цифровая подпись (Сообщение, r, s) = ", signs)
+    print("Цифровая подпись (Сообщение, r, s) = ", signs)
     separator()
     # Проверяем подлинность подписи
-    print ("Проверка подписи: ")
-    print (f"Проверка хеша = {hash_again} ")
+    print("Проверка подписи: ")
+    print(f"Проверка хеша = {hash_again} ")
     if hash_again == hash_:
-        print (f"Получаем один и тот же хеш: {hash_again} = {hash_}")
+        print(f"Получаем один и тот же хеш: {hash_again} = {hash_}")
         condition_1 = pow(y, r, p) * pow(r, s, p) % p
         condition_2 = pow(g, hash_again, p)
         if condition_1 == condition_2:
@@ -117,23 +117,22 @@ def sign(p, x, g, k, hash_, text, key):
             print("Неверная цифровая подпись")
             exit()
     else:
-        print ("Неверная цифровая подпись")
+        print("Неверная цифровая подпись")
         exit()
 
 
 if __name__ == "__main__":
     separator()
-    print ("Сначала просто сделаем электронную подпись: ")
+    print("Сначала просто сделаем электронную подпись: ")
     text_1 = "Privet medved"
-    print (f'Наш текст, для которого применяем электронную подпись: {text_1}')
+    print(f'Наш текст, для которого применяем электронную подпись: {text_1}')
     hash_1 = int(sha512(text_1.encode("utf-8")).hexdigest(), 16) % 10 ** 5
-    sign(11, 3, 0, 0, hash_1, text_1, key = 'no_secret')  #При g = 0, k = 0 включается генератор!
+    sign(11, 3, 0, 0, hash_1, text_1, key='no_secret')  # При g = 0, k = 0 включается генератор!
     separator()
-    print ("Теперь делаем передачу закрытого сообщения используя подпись: ")
+    print("Теперь делаем передачу закрытого сообщения используя подпись: ")
     text_2 = "Privet"
     print(f'Наш текст, для которого применяем электронную подпись: {text_2}')
     hash_2 = int(sha512(text_2.encode("utf-8")).hexdigest(), 16) % 10 ** 5
-    sign(11, 3, 0, 255, hash_2, text_2, key = 'secret')  # При g = 0 включается генератор!
+    sign(11, 3, 0, 255, hash_2, text_2, key='secret')  # При g = 0 включается генератор!
     separator()
     exit()
-exit()
