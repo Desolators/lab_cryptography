@@ -109,11 +109,11 @@ def keys_p_q_rand(p, q):
 
 
 def keys_ferma(e, N):
-    p_q = alg_fact_ferma(N)
-    fn = (p_q[0] - 1) * (p_q[1] - 1)
-    print(f"p = {p_q[0]}, q = {p_q[1]}, {N = }, φ(N) = {fn}")
-    print(f"{e = }")
+    p, q = alg_fact_ferma(N)
+    fn = (p - 1) * (q - 1)
     d = pow(e, -1, fn)
+    print(f"{p = }, {q = }, {N = }, φ(N) = {fn}")
+    print(f"{e = }")
     print(f"{d = }")
     return d
 
