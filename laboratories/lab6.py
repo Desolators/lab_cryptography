@@ -45,7 +45,7 @@ def generate_k(k, p):
     return k
 
 
-def hash_p_x_simple_generator(hash_, secret):
+def hash_p_x_g_r_s_simple_generator(hash_, secret):
     p, x, g, r, s = 0, 0, 0, 0, 0
     while gcd(secret, p) != 1 or gcd(hash_, p) != 1 or not is_prime(p) or gcd(s, p - 1) != 1 or gcd(secret, p - 1) != 1:
         p = simple_number_p(4)
@@ -79,7 +79,7 @@ def sign(p, x, g, k, hash_, text, key):
     if g == 0 and key == 'secret':  # включаем генератор и используем в качестве K - секретное сообщение
         secrets = k
         print(f"Скрытое сообщние = {secrets}")
-        generator = hash_p_x_simple_generator(hash_, secrets)
+        generator = hash_p_x_g_r_s_simple_generator(hash_, secrets)
         p, x, g, r, s = generator
         y = create_y(g, x, p)
         hash_again = int(sha512(text.encode("utf-8")).hexdigest(), 16) % 10 ** 5
@@ -123,7 +123,7 @@ if __name__ == "__main__":
     text_1 = "Privet medved"
     print(f'Наш текст, для которого применяем электронную подпись: {text_1}')
     hash_1 = int(sha512(text_1.encode("utf-8")).hexdigest(), 16) % 10 ** 5
-    sign(11, 3, 0, 0, hash_1, text_1, key='no_secret')  # При g = 0, k = 0 включается генератор!
+    sign(11, 3, 0, 0, hash_1, text_1, key='no_secret')  # При g = 0 включается генератор!
     separator()
     print("Теперь делаем передачу закрытого сообщения используя подпись: ")
     text_2 = "Privet"
