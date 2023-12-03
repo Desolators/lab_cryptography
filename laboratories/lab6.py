@@ -126,12 +126,12 @@ if __name__ == "__main__":
     text_1 = "Privet medved"
     print(f'Наш текст, для которого применяем электронную подпись: {text_1}')
     hash_1 = int(sha512(text_1.encode("utf-8")).hexdigest(), 16) % 10 ** 5
-    sign(11, 3, 0, 0, hash_1, text_1, key='no_secret')  # При g = 0 включается генератор!
+    sign(p = 11, x = 3, g = 0, k = 0, hash_ = hash_1, text = text_1, key='no_secret')  # При g = 0 включается генератор!
     separator()
     print("Теперь делаем передачу закрытого сообщения используя подпись: ")
     text_2 = "Privet"
     print(f'Наш текст, для которого применяем электронную подпись: {text_2}')
     hash_2 = int(sha512(text_2.encode("utf-8")).hexdigest(), 16) % 10 ** 5
-    sign(11, 3, 0, 2_155, hash_2, text_2, key='secret')  # При g = 0 включается генератор!
+    sign(p = 11, x = 3, g = 0, k = 2_155, hash_ = hash_2, text = text_2, key='secret')  # При g = 0 включается генератор!
     separator()
     exit()
