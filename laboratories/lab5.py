@@ -34,7 +34,7 @@ def gcd(a, b):
 
 
 def open_key_search(fn):
-    e = randint(2, randint(3, fn - (fn // 4) ))
+    e = randint(2, randint(3, fn - (fn // 4)))
     while e != fn - 2:
         if gcd(fn, e)[0] == 1:
             return e
