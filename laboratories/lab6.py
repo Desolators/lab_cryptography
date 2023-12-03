@@ -95,7 +95,8 @@ def sign(p, x, g, k, hash_, text, key):
     separator()
     # Начинаем формирование цифровой подписи
     print(f"{k = }, {r = }, Обратный элемент k = {pow(k, -1, p - 1)}, {s = } ")
-    print("Цифровая подпись (Сообщение, r, s) = ", text, r, s)
+    digital_sign = text, r, s
+    print("Цифровая подпись (Сообщение, r, s) = ", digital_sign)
     separator()
     # Проверяем подлинность подписи
     print("Проверка подписи: ")
@@ -109,6 +110,8 @@ def sign(p, x, g, k, hash_, text, key):
             if key == 'secret':
                 secret_message = pow(s, -1, p - 1) * pow(hash_again - (x * r), 1, p - 1) % (p - 1)
                 print(f"Получаем скрытое сообщение: {secret_message}")
+                return secret_message, digital_sign
+            return digital_sign
         else:
             print("Неверная цифровая подпись")
             exit()
