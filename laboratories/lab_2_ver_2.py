@@ -44,14 +44,11 @@ for k in range(len(umnoz_so_sdvigom) - 1):
                 j -= 1
             index = sum_sdvig / (lens[0] * lens[j + 1])
             break
-
         count += 1
         count_sdvig[k] = count
         print("Sdvigi  :", count_sdvig[k])
         print("index sdviga : ", index)
-
 print("Sdvigi final  : ", count_sdvig)
-
 x = [[] for i in range(key - 1)]
 for k in range(len(alp)):
     for h in range(len(count_sdvig)):
@@ -59,16 +56,13 @@ for k in range(len(alp)):
         y = x[h]
         if x[h]:
             x[h] = alp[y]
-
     print(k + 1, ".", *alp[k], *x)
-
 key_vizener = input('Enter key: ').split()
 for k in range(len(key_vizener)):
     index0 = ord(key_vizener[k])
     index_current = index0 - ord("a")
     if key_vizener[k] == alp[index_current]:
         key_vizener[k] = index_current
-
 otvet = [""] * len(shifr)
 start = 0
 for k in range(len(shifr)):
