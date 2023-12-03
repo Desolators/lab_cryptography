@@ -94,10 +94,10 @@ def create_sign(p, x, g, k, hash_, text, key):
     digital_sign = text, r, s
     print("Цифровая подпись (Сообщение, r, s) = ", digital_sign)
     separate()
-    return y, r, p, s, x, g, key
+    return y, r, p, s, x, g, key, hash_
 
 
-def check_digital_sign_and_secret_message(hash_, hash_again, y, r, p, s, x, g, key):
+def check_sign_and_secret_messg(hash_, hash_again, y, r, p, s, x, g, key):
     # Проверяем подлинность подписи
     ok = u'\u2713'  # значок галочки
     print("Проверка подписи: ")
@@ -126,17 +126,17 @@ if __name__ == "__main__":
     print("Сначала просто сделаем электронную подпись: ")
     text_1 = "Privet medved"
     print(f'Наш текст, для которого применяем электронную подпись: {text_1}')
-    hash_1 = int(sha512(text_1.encode("utf-8")).hexdigest(), 16) % 10 ** 5
-    y0, r0, p0, s0, x0, g0, k0 = create_sign(p=11, x=3, g=0, k=0, hash_=hash_1, text=text_1, key='no_secret')
+    hash__ = int(sha512(text_1.encode("utf-8")).hexdigest(), 16) % 10 ** 5
+    y0, r0, p0, s0, x0, g0, k0, hash__1 = create_sign(p=11, x=3, g=0, k=0, hash_=hash__, text=text_1, key='no_secret')
     print('Теперь проверим подпись')
-    check_digital_sign_and_secret_message(hash_=hash_1, hash_again=hash_1, y=y0, r=r0, p=p0, s=s0, x=x0, g=g0, key=k0)
+    check_sign_and_secret_messg(hash_=hash__1, hash_again=hash__1, y=y0, r=r0, p=p0, s=s0, x=x0, g=g0, key=k0)
     separate()
     print("Теперь делаем передачу закрытого сообщения используя подпись: ")
     text_2 = "Privet"
     print(f'Наш текст, для которого применяем электронную подпись: {text_2}')
     hash_2 = int(sha512(text_2.encode("utf-8")).hexdigest(), 16) % 10 ** 5
-    y1, r1, p1, s1, x1, g1, k1 = create_sign(p=11, x=3, g=0, k=123, hash_= hash_2, text=text_2, key='secret')
+    y1, r1, p1, s1, x1, g1, k1, hash__2 = create_sign(p=11, x=3, g=0, k=123, hash_= hash_2, text=text_2, key='secret')
     print('Теперь проверим подпись (и найдем секретное сообщение)')
-    check_digital_sign_and_secret_message(hash_=hash_2, hash_again=hash_2, y=y1, r=r1, p=p1, s=s1, x=x1, g=g1, key=k1)
+    check_sign_and_secret_messg(hash_=hash__2, hash_again=hash__2, y=y1, r=r1, p=p1, s=s1, x=x1, g=g1, key=k1)
     separate()
     exit()
