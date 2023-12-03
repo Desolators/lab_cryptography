@@ -70,7 +70,7 @@ for k in range(len(shifr)):
     if start > (key - 1):
         start = 0
     index_current = shifr[k]
-    for h in range(start, len(key_vizener), 1):
+    for h in range(start, len(key_vizener)):
         digital_shifr = (dict_num[index_current] - key_vizener[h]) % 26
         index_current = digital_shifr
         if digital_shifr == index_current:
