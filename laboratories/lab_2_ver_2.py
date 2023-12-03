@@ -62,7 +62,7 @@ for k in range(len(alp)):
     print(k + 1, ".", *alp[k], *x)
 key_vizener = input('Enter key: ').split()
 for k in range(len(key_vizener)):
-    index_current = str(key_vizener[k])
+    index_current = key_vizener[k]
     if key_vizener[k] == dict_alp[index_current]:
         key_vizener[k] = dict_num[index_current]
 otvet = [""] * len(shifr)
