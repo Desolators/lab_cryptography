@@ -3,18 +3,18 @@ from math import ceil
 from math import sqrt
 
 
-def separator():
+def separate():
     return print("----------------------------------------------------")
 
 
-def is_prime(p, d=2):
+def check_prime(p, d=2):
     while d * d <= p and p % d:
         d += 1
     return d * d > p
 
 
-def simple_number_p_q(p, q):
-    while not is_prime(p) or not is_prime(q):
+def generate_simple_number_p_q(p, q):
+    while not check_prime(p) or not check_prime(q):
         p = randint(100_000_000_000, 500_000_000_000)  # после 14 знаков начинает работать очень медленно
         q = randint(510_000_000_000, 999_999_999_999)
     return p, q
@@ -64,7 +64,7 @@ def encryption(*args, x, key):
         N = p * q
         fn = (p - 1) * (q - 1)
         print(f"{p = }, {q = }, {N = }, φ(N) = {fn}")
-        e1, d1, e2 = keys_automate(fn)
+        e1, d1, e2 = find_keys_automate(fn)
         y = pow(x, e1, N)
         print(f"X = {x}")
         print(f"Y = {y} ")
@@ -74,7 +74,7 @@ def encryption(*args, x, key):
         p, q = args
         N = p * q
         print(f"{p = }, {q = }, {N = }")
-        e1, d1, e2 = keys_p_q_rand(p, q)
+        e1, d1, e2 = find_keys_p_q_rand(p, q)
         print(f"d = {d1}")
         print(f"X = {x}")
         y1, y2 = pow(x, e1, N), pow(x, e2, N)
@@ -82,7 +82,7 @@ def encryption(*args, x, key):
         return y1, e1, d1, e2, y2, N
 
 
-def keys_automate(fn):
+def find_keys_automate(fn):
     e1, e2 = open_key_search(fn, randint(2, fn // 2)), open_key_search(fn, randint(2, fn // 2))
     d1, d2 = pow(e1, -1, fn), pow(e2, -1, fn)
     while e1 == d1 or e2 == d2:
@@ -93,7 +93,7 @@ def keys_automate(fn):
     return e1, d1, e2
 
 
-def keys_p_q_rand(p, q):
+def find_keys_p_q_rand(p, q):
     fn = (p - 1) * (q - 1)
     print(f"φ(N) = {fn}")
     e1, e2 = (open_key_search(fn, randint(2, fn // 2))), (open_key_search(fn, randint(2, fn // 2)))
@@ -106,7 +106,7 @@ def keys_p_q_rand(p, q):
     return e1, d1, e2
 
 
-def keys_ferma(e, N):
+def find_keys_ferma(e, N):
     p, q = alg_fact_ferma(N)
     fn = (p - 1) * (q - 1)
     print(f"p = {p}, q = {q}, {N = }, φ(N) = {fn}")
@@ -152,51 +152,51 @@ def keyless_reading(y1, y2, e1, e2, N):
 
 
 if __name__ == '__main__':
-    separator()
-    separator()
+    separate()
+    separate()
     print("НАЧАЛО ЛАБОРАТОРНОЙ РАБОТЫ: ")
-    separator()
+    separate()
     print("Задание 1, находим шифротекст Y имея исходный текст X, открытый ключ e, и модуль шифрования N: ")
     encryption(17, 1_739, x=132, key="task_1")  # e, N, x
-    separator()
-    separator()
+    separate()
+    separate()
     print("Задание 2, находим значение исходного текста X, имея модуль шифрования N, открытый ключ е, и  Y : ")
     re_encryption_or_krmd(y_0=66, e=283, N=377)
-    separator()
+    separate()
     re_encryption(y=66, e=283, N=377)
-    separator()
-    separator()
+    separate()
+    separate()
     print("Задание 3, находим значение  d, имея  N, открытый ключ е (метод факторизации ферма): ")
-    closed_key = keys_ferma(e=519, N=4_183)
-    separator()
+    closed_key = find_keys_ferma(e=519, N=4_183)
+    separate()
     print("Задание 4, находим значение  X, имея  N, открытый ключ е и шифротекст Y : ")
     print("Метод перешифрования: ", )
     re_encryption_or_krmd(y_0=13, e=7, N=143)  # y, e, N
-    separator()
+    separate()
     re_encryption(y=13, e=7, N=143)
-    separator()
-    separator()
+    separate()
+    separate()
     print("Задание 5, найти методом бесключевого чтения исходный текст X, имея е1, е2, N и шифротексты Y1,Y2: ")
     keyless_reading(y1=1_682, y2=42, e1=7, e2=3, N=3_403)
     re_encryption(y=42, e=3, N=3_403)
-    separator()
-    separator()
+    separate()
+    separate()
     print("НАЧАЛО ТЕСТОВ:")
-    separator()
-    separator()
+    separate()
+    separate()
     test = encryption(1_874_947_153_801, 2_797_477_623_911, x=543, key="automate")  # p, q, x
     y_auto, e1_auto, d1_auto, e2_auto, N_auto = test
     decryption(y_auto, d1_auto, N_auto)
-    separator()
+    separate()
     re_encryption(y_auto, e1_auto, N_auto)
     print("Дешифруем, и делаем вывод, что при перешифровании(x += 1) сложность дешифровки зависит от длины X")
-    separator()
+    separate()
     print("Задаем псевдогенератором случайные простые p и q, и автоматически генерируем ключ e:")
-    p_and_q = simple_number_p_q(20, 20)  # p, q
+    p_and_q = generate_simple_number_p_q(20, 20)  # p, q
     rand_cypher_e_d = encryption(p_and_q[0], p_and_q[1], x=42_344_411, key="rand")
     y1_test, e1_test, d1_test, e2_test, y2_test, N_test = rand_cypher_e_d
     decryption(y1_test, d1_test, N_test)
-    separator()
+    separate()
     keyless_reading(y1_test, y2_test, e1_test, e2_test, N_test)
-    separator()
+    separate()
     exit()

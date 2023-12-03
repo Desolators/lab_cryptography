@@ -3,24 +3,24 @@ from hashlib import sha512
 from math import gcd
 
 
-def separator():
+def separate():
     return print("----------------------------------------------------")
 
 
-def is_prime(n, d = 2):
+def check_is_prime(n, d = 2):
     while d * d <= n and n % d:
         d += 1
     return d * d > n
 
 
-def simple_number_p(p):
-    while not is_prime(p):
+def generate_simple_number_p(p):
+    while not check_is_prime(p):
         p = randint(25_000_000, 55_000_000)
     return p
 
 
-def primitive_root(p):
-    g = randint(2, simple_number_p(4))
+def find_primitive_root(p):
+    g = randint(2, generate_simple_number_p(4))
     fn = (p - 1)
     while pow(g, fn // 2, p) == 1:
         g += 1
@@ -28,7 +28,7 @@ def primitive_root(p):
 
 
 def generate_p_x():
-    p = simple_number_p(4)
+    p = generate_simple_number_p(4)
     x = randint(2, p - 2)
     return p, x
 
@@ -45,28 +45,28 @@ def generate_k(k, p):
     return k
 
 
-def hash_p_x_g_r_s_simple_generator(hash_, secret):
+def hash_p_x_g_r_s_simple_generate(hash_, secret):
     p, x, g, r, s = 0, 0, 0, 0, 0
-    while gcd(secret, p) != 1 or gcd(hash_, p) != 1 or not is_prime(p) or gcd(s, p - 1) != 1 or gcd(secret, p - 1) != 1:
-        p = simple_number_p(4)
+    while gcd(secret, p) != 1 or gcd(hash_, p) != 1 or not check_is_prime(p) or gcd(s, p - 1) != 1 or gcd(secret, p - 1) != 1:
+        p = generate_simple_number_p(4)
         if gcd(secret, p - 1) == 1:
             x = randint(2, p - 3)
-            g = primitive_root(p)
+            g = find_primitive_root(p)
             r = pow(g, secret, p)
             s = (hash_ - x * r) * pow(secret, -1, p - 1) % (p - 1)
     return p, x, g, r, s
 
 
-def sign(p, x, g, k, hash_, text, key):
-    separator()
-    separator()
+def create_sign(p, x, g, k, hash_, text, key):
+    separate()
+    separate()
     hash_again = hash_
     y, r, s = 0, 0, 0
     ok = u'\u2713'  # значок галочки
     # Задаем стартовые значения (формируем ключи)
     if g == 0 and key == 'no_secret':  # при этом условии включаем генератор и используем без секретного сообщения
         p, x = generate_p_x()
-        g = primitive_root(p)
+        g = find_primitive_root(p)
         y = create_y(g, x, p)
         k = generate_k(2, p)
         hash_again = int(sha512(text.encode("utf-8")).hexdigest(), 16) % 10 ** 5
@@ -79,7 +79,7 @@ def sign(p, x, g, k, hash_, text, key):
     if g == 0 and key == 'secret':  # включаем генератор и используем в качестве K - секретное сообщение
         secrets = k
         print(f"Скрытое сообщние = {secrets}")
-        generator = hash_p_x_g_r_s_simple_generator(hash_, secrets)
+        generator = hash_p_x_g_r_s_simple_generate(hash_, secrets)
         p, x, g, r, s = generator
         y = create_y(g, x, p)
         hash_again = int(sha512(text.encode("utf-8")).hexdigest(), 16) % 10 ** 5
@@ -92,12 +92,12 @@ def sign(p, x, g, k, hash_, text, key):
     print(f"Закрытый ключ (x) = {x}")
     print(f"Открытый ключ (p, g, y) = {p, g, y}")
     print(f"Хеш = {hash_}")
-    separator()
+    separate()
     # Начинаем формирование цифровой подписи
     print(f"{k = }, {r = }, Обратный элемент k = {pow(k, -1, p - 1)}, {s = } ")
     digital_sign = text, r, s
     print("Цифровая подпись (Сообщение, r, s) = ", digital_sign)
-    separator()
+    separate()
     # Проверяем подлинность подписи
     print("Проверка подписи: ")
     print(f"Проверка хеша = {hash_again} ")
@@ -121,17 +121,17 @@ def sign(p, x, g, k, hash_, text, key):
 
 
 if __name__ == "__main__":
-    separator()
+    separate()
     print("Сначала просто сделаем электронную подпись: ")
     text_1 = "Privet medved"
     print(f'Наш текст, для которого применяем электронную подпись: {text_1}')
     hash_1 = int(sha512(text_1.encode("utf-8")).hexdigest(), 16) % 10 ** 5
-    sign(p = 11, x = 3, g = 0, k = 0, hash_ = hash_1, text = text_1, key='no_secret')  # При g = 0 включается генератор!
-    separator()
+    create_sign(p = 11, x = 3, g = 0, k = 0, hash_ = hash_1, text = text_1, key='no_secret')  # При g = 0 включается генератор!
+    separate()
     print("Теперь делаем передачу закрытого сообщения используя подпись: ")
     text_2 = "Privet"
     print(f'Наш текст, для которого применяем электронную подпись: {text_2}')
     hash_2 = int(sha512(text_2.encode("utf-8")).hexdigest(), 16) % 10 ** 5
-    sign(p = 11, x = 3, g = 0, k = 2_155, hash_ = hash_2, text = text_2, key='secret')  # При g = 0 включается генератор!
-    separator()
+    create_sign(p = 11, x = 3, g = 0, k = 2_155, hash_ = hash_2, text = text_2, key='secret')  # При g = 0 включается генератор!
+    separate()
     exit()
