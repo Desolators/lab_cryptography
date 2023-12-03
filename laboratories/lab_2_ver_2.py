@@ -59,20 +59,20 @@ for k in range(len(dict_alp)):
     print(k + 1, ".", *alp[k], *x)
 key_vizener = input('Enter key: ').split()
 for k in range(len(key_vizener)):
-    index_current = key_vizener[k]
-    if key_vizener[k] == dict_alp[index_current][0]:
-        key_vizener[k] = dict_alp[index_current][2]
+    current_element = key_vizener[k]
+    if key_vizener[k] == dict_alp[current_element][0]:
+        key_vizener[k] = dict_alp[current_element][2]
 otvet = [""] * len(shifr)
 start = 0
 for k in range(len(shifr)):
     if start > (key - 1):
         start = 0
-    index_current = shifr[k]
+    current_element = shifr[k]
     for h in range(start, len(key_vizener)):
-        digital_shifr = (dict_alp[index_current][2] - key_vizener[h]) % 26
-        index_current = digital_shifr
-        if digital_shifr == index_current:
-            otvet[k] = alp[index_current]
+        digital_shifr = (dict_alp[current_element][2] - key_vizener[h]) % 26
+        current_element = digital_shifr
+        if digital_shifr == current_element:
+            otvet[k] = alp[current_element]
         start += 1
         break
 print("Plain text: ", *otvet, sep="")
