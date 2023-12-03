@@ -33,7 +33,8 @@ def gcd(a, b):
             return b, x_1, y_1
 
 
-def open_key_search(fn, e):
+def open_key_search(fn):
+    e = randint(2, randint(3, fn - (fn // 4) ))
     while e != fn - 2:
         if gcd(fn, e)[0] == 1:
             return e
@@ -83,10 +84,10 @@ def encryption(*args, x, key):
 
 
 def find_keys_automate(fn):
-    e1, e2 = open_key_search(fn, randint(2, fn // 2)), open_key_search(fn, randint(2, fn // 2))
+    e1, e2 = open_key_search(fn), open_key_search(fn)
     d1, d2 = pow(e1, -1, fn), pow(e2, -1, fn)
     while e1 == d1 or e2 == d2:
-        e1, e2 = open_key_search(fn, randint(2, fn // 2)), open_key_search(fn, randint(2, fn // 2))
+        e1, e2 = open_key_search(fn), open_key_search(fn)
         d1, d2 = pow(e1, -1, fn), pow(e2, -1, fn)
     print(f"{e1 = }, {e2 = }")
     print(f"{d1 = }, {d2 = }")
@@ -96,10 +97,10 @@ def find_keys_automate(fn):
 def find_keys_p_q_rand(p, q):
     fn = (p - 1) * (q - 1)
     print(f"φ(N) = {fn}")
-    e1, e2 = (open_key_search(fn, randint(2, fn // 2))), (open_key_search(fn, randint(2, fn // 2)))
+    e1, e2 = (open_key_search(fn)), (open_key_search(fn))
     d1, d2 = pow(e1, -1, fn), pow(e2, -1, fn)
     while e1 == d1 or e2 == d2:
-        e1, e2 = (open_key_search(fn, randint(2, fn // 2))), (open_key_search(fn, randint(2, fn // 2)))
+        e1, e2 = open_key_search(fn), open_key_search(fn)
         d1, d2 = pow(e1, -1, fn), pow(e2, -1, fn)
     print(f"{e1 = }, {e2 = }")
     print(f"{d1 = }, {d2 = }")
