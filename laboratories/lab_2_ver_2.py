@@ -1,13 +1,12 @@
-shifr = ("isfptitekthhcxatwbsipppdlmmweujgdtxhuaaxxxlelwegseedrzwegspxsfkjwawiljvotcxsxatjxcgxprwppevpt"
-         "srxhwetjmwmfprwphxttftptcgadprhimipxshhlrnesgwmlhtbgmmilbgxrnekswhufhpvwuigrigxrxuixilbvlexjxi"
-         "saxqltifthadpedatchxmmliigriujxtqyksighmzwmgvlxsmieiwwmlqvnhltchipwlthbieedrzilxisibsliteprdgii"
-         "temthmwiheikpxbdrwxhbiezpmgrsfeekthmwibcwbvrbumvprmllbiippwathlivxpopxxailxuekgitrlbckvdrmxrxcx"
-         "huygllbiippwathytrvtegswtihhlrhcemgixqsqsmlrsngezthcxqvpqxhobetbckhjxtixatktiipxxapxbcttxptchlxr"
-         "zxrzqyyueedktawugmgvmgvatiikuvhbxatxhlrijqiwewppppclqixcltiiyjppdvdxrmdqltcxhfxusktfnirhlmmsmwcsm"
-         "hxkxoxwmfhsatvxbifqikthmwemilxgippwvdqiprrpxmwiijqillbiifjptixhprwcizgsudclprwvmkawptvxppppclilxg"
-         "ippmmxrzilxxvmjvghvxhxbckmgewxrzeptnxaxrzhunpvktpexrzumzwxbcklzcepvdxrzprwwiktqxbfxgiwiltieeilhjka"
-         "ilxeyfeathsgactwygsvxsegsjbuxrnekswhujcxqgtzxgkhiftropxxapfnroxisylemtvnchxgegwsngegsiotrmwighsft"
-         "fhscztrxgeeacaphmdkhpjmtvaxq")
+shifr = ("isfptitekthhcxatwbsipppdlmmweujgdtxhuaaxxxlelwegseedrzwegspxsfkjwawiljvotcxsxatjxcgxprwppevptsrxhwetjmwmfprwp"
+         "hxttftptcgadprhimipxshhlrnesgwmlhtbgmmilbgxrnekswhufhpvwuigrigxrxuixilbvlexjxisaxqltifthadpedatchxmmliigriujx"
+         "tqyksighmzwmgvlxsmieiwwmlqvnhltchipwlthbieedrzilxisibsliteprdgiitemthmwiheikpxbdrwxhbiezpmgrsfeekthmwibcwbvrb"
+         "umvprmllbiippwathlivxpopxxailxuekgitrlbckvdrmxrxcxhuygllbiippwathytrvtegswtihhlrhcemgixqsqsmlrsngezthcxqvpqxh"
+         "obetbckhjxtixatktiipxxapxbcttxptchlxrzxrzqyyueedktawugmgvmgvatiikuvhbxatxhlrijqiwewppppclqixcltiiyjppdvdxrmdq"
+         "ltcxhfxusktfnirhlmmsmwcsmhxkxoxwmfhsatvxbifqikthmwemilxgippwvdqiprrpxmwiijqillbiifjptixhprwcizgsudclprwvmkawp"
+         "tvxppppclilxgippmmxrzilxxvmjvghvxhxbckmgewxrzeptnxaxrzhunpvktpexrzumzwxbcklzcepvdxrzprwwiktqxbfxgiwiltieeilhj"
+         "kailxeyfeathsgactwygsvxsegsjbuxrnekswhujcxqgtzxgkhiftropxxapfnroxisylemtvnchxgegwsngegsiotrmwighsftfhscztrxge"
+         "eacaphmdkhpjmtvaxq")
 alp = "abcdefghijklmnopqrstuvwxyz"
 dict_alp = {'a': 'a', 'b': 'b', 'c': 'c', 'd': 'd', 'e': 'e', 'f': 'f', 'g': 'g', 'h': 'h', 'i': 'i', 'j': 'j',
             'k': 'k', 'l': 'l', 'm': 'm', 'n': 'n', 'o': 'o', 'p': 'p', 'q': 'q', 'r': 'r', 's': 's', 't': 't',
