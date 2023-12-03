@@ -41,7 +41,6 @@ for k in range(len(umnoz_so_sdvigom) - 1):
         for i in range(len(alp)):
             umnoz_so_sdvigom[k][i] = (freq[0][i] * freq[k + 1][i])
         sum_sdvig = sum(umnoz_so_sdvigom[k])
-
         for j in range(len(lens)):
             if j > (key - 1):
                 j -= 1
