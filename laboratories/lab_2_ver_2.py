@@ -12,10 +12,10 @@ alp = "abcdefghijklmnopqrstuvwxyz"
 dict_alp = {'a': 'a', 'b': 'b', 'c': 'c', 'd': 'd', 'e': 'e', 'f': 'f', 'g': 'g', 'h': 'h','i': 'i', 'j': 'j',
             'k': 'k', 'l': 'l', 'm': 'm', 'n': 'n', 'o': 'o', 'p': 'p', 'q': 'q', 'r': 'r', 's': 's', 't': 't',
             'u': 'u', 'v': 'v', 'w': 'w', 'x': 'x', 'y': 'y', 'z': 'z'}
-counter = {'a': 0, 'b': 0, 'c': 0, 'd': 0, 'e': 0, 'f': 0, 'g': 0, 'h': 0, 'i': 0, 'j': 0,'k': 0, 'l': 0, 'm': 0,
+freq_dict = {'a': 0, 'b': 0, 'c': 0, 'd': 0, 'e': 0, 'f': 0, 'g': 0, 'h': 0, 'i': 0, 'j': 0,'k': 0, 'l': 0, 'm': 0,
            'n': 0, 'o': 0, 'p': 0, 'q': 0, 'r': 0, 's': 0, 't': 0, 'u': 0, 'v': 0,'w': 0, 'x': 0, 'y': 0, 'z': 0}
 key = int(input("Enter key: "))
-generator = [dict(counter) for i in range(key)]
+generator = [dict(freq_dict) for i in range(key)]
 lens = [0] * key
 for elem in range (len(shifr)):
     column_number = elem % key
