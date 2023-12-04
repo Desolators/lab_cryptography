@@ -49,5 +49,11 @@ shift_1 = 0.5
 T1 = 1
 T2 = 2
 result_1 = model(T1, T2, duration_1, shift_1)
-print (f'Значение интеграла произведения волн: {result_1}')
+print (f'Результат интеграла произведения волн: {result_1}')
 orthogonal_rect_waves(T1, T2, duration_1, shift_1)
+
+
+
+
+
+
