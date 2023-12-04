@@ -7,7 +7,7 @@ def rect_wave(t, period):
 
 
 def model(period_1, period_2, duration, shift):
-    t = numpy.linspace(-duration / 2, duration / 3, 2000)
+    t = numpy.linspace(-duration / 4, duration / 4, 2000)
     wave1 = rect_wave(t - shift, period_1)
     wave2 = rect_wave(t, period_2)
     inner_product = numpy.sum(wave1 * wave2)
@@ -20,13 +20,13 @@ def orthogonal_rect_waves(period_1, period_2, duration, shift):
         print("Волны ортогональны")
     else:
         print("Волны не ортогональны")
-    t = numpy.linspace(-duration / 4, duration / 6, 2000)
+    t = numpy.linspace(-duration / 4, duration / 4, 2000)
     wave1 = rect_wave(t - shift, period_1)
     wave2 = rect_wave(t, period_2)
     pyplot.figure(figsize=(10, 6))
     pyplot.subplot(211)
-    pyplot.plot(t, wave1, color='black', linestyle='--', label=f'Волна 1 (период = {period_1})')
-    pyplot.plot(t, wave2, color='blue', linestyle='-', label=f'Волна 2 (период = {period_2})')
+    pyplot.plot(t, wave1, color='black', linestyle='-', label=f'Волна 1 (период = {period_1})')
+    pyplot.plot(t, wave2, color='blue', linestyle='--', label=f'Волна 2 (период = {period_2})')
     pyplot.xlabel('t')
     pyplot.ylabel('Амплитуда')
     pyplot.title('Ортогональные прямоугольные волны со сдвигом во времени')
