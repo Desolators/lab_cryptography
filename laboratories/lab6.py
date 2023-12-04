@@ -135,7 +135,7 @@ if __name__ == "__main__":
     text_2 = "Privet"
     print(f'Наш текст, для которого применяем электронную подпись: {text_2}')
     hash_2 = int(sha512(text_2.encode("utf-8")).hexdigest(), 16) % 10 ** 5
-    y1, r1, p1, s1, x1, g1, k1, hash__2 = create_sign(p=11, x=3, g=0, k=123, hash_= hash_2, text=text_2, key='secret')
+    y1, r1, p1, s1, x1, g1, k1, hash__2 = create_sign(p=11, x=3, g=0, k=123, hash_=hash_2, text=text_2, key='secret')
     print('Теперь проверим подпись (и найдем секретное сообщение)')
     check_sign_and_secret_messg(hash_=hash__2, hash_again=hash__2, y=y1, r=r1, p=p1, s=s1, x=x1, g=g1, key=k1)
     separate()
