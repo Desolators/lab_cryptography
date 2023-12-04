@@ -3,34 +3,32 @@ from hashlib import sha512
 from math import gcd
 
 
-def separator():
+def separate():
     return print("----------------------------------------------------")
 
 
-def is_prime(n):
-    d = 2
-    while d * d <= n and n % d != 0:
+def prime_check(n, d=2):
+    while d * d <= n and n % d:
         d += 1
     return d * d > n
 
 
-def simple_number_p(p):
-    while not is_prime(p):
-        p = randint(25000000, 55000000)
+def generate_simple_number_p(p):
+    while not prime_check(p):
+        p = randint(25_000_000, 55_000_000)
     return p
 
 
-def primitive_root(p):
-    g = randint(2, simple_number_p(4))
+def find_primitive_root(p):
+    g = randint(2, generate_simple_number_p(4))
     fn = (p - 1)
-    condition = int(fn / 2)
-    while pow(g, condition, p) == 1:
+    while pow(g, fn // 2, p) == 1:
         g += 1
     return g
 
 
 def generate_p_x():
-    p = simple_number_p(4)
+    p = generate_simple_number_p(4)
     x = randint(2, p - 2)
     return p, x
 
@@ -47,31 +45,28 @@ def generate_k(k, p):
     return k
 
 
-def hash_p_x_simple_generator(hash_, secret):
+def hash_p_x_g_r_s_simple_generate(hash_, k):
     p, x, g, r, s = 0, 0, 0, 0, 0
-    while gcd(secret, p) != 1 or gcd(hash_, p) != 1 or not is_prime(p) or gcd(s, p - 1) != 1 or gcd(secret, p - 1) != 1:
-        p = simple_number_p(4)
-        if gcd(secret, p - 1) == 1:
+    while gcd(k, p) != 1 or gcd(hash_, p) != 1 or not prime_check(p) or gcd(s, p - 1) != 1 or gcd(k, p - 1) != 1:
+        p = generate_simple_number_p(4)
+        if gcd(k, p - 1) == 1:
             x = randint(2, p - 3)
-            g = primitive_root(p)
-            r = pow(g, secret, p)
-            s = (hash_ - x * r) * pow(secret, -1, p - 1) % (p - 1)
+            g = find_primitive_root(p)
+            r = pow(g, k, p)
+            s = (hash_ - x * r) * pow(k, -1, p - 1) % (p - 1)
     return p, x, g, r, s
 
 
-def sign(p, x, g, k, hash_, text, key):
-    separator()
-    separator()
-    hash_again = hash_
+def create_sign(p, x, g, k, hash_, text, key):
+    separate()
+    separate()
     y, r, s = 0, 0, 0
-    ok = u'\u2713'  # значок галочки
     # Задаем стартовые значения (формируем ключи)
     if g == 0 and key == 'no_secret':  # при этом условии включаем генератор и используем без секретного сообщения
         p, x = generate_p_x()
-        g = primitive_root(p)
+        g = find_primitive_root(p)
         y = create_y(g, x, p)
         k = generate_k(2, p)
-        hash_again = int(sha512(text.encode("utf-8")).hexdigest(), 16) % 10 ** 5
         r = pow(g, k, p)
         s = (hash_ - x * r) * pow(k, -1, p - 1) % (p - 1)
     elif g != 0 and key == 'no_secret':  # при этом условии стартовые значения подаются из входа функции
@@ -81,10 +76,9 @@ def sign(p, x, g, k, hash_, text, key):
     if g == 0 and key == 'secret':  # включаем генератор и используем в качестве K - секретное сообщение
         secrets = k
         print(f"Скрытое сообщние = {secrets}")
-        generator = hash_p_x_simple_generator(hash_, secrets)
+        generator = hash_p_x_g_r_s_simple_generate(hash_, secrets)
         p, x, g, r, s = generator
         y = create_y(g, x, p)
-        hash_again = int(sha512(text.encode("utf-8")).hexdigest(), 16) % 10 ** 5
     elif g != 0 and key == 'secret':  # при этом условии берем значения из входа функции
         secrets = k
         print(f"Скрытое сообщние = {secrets}")
@@ -92,16 +86,20 @@ def sign(p, x, g, k, hash_, text, key):
         r = pow(g, secrets, p)
         s = (hash_ - x * r) * pow(secrets, -1, p - 1) % (p - 1)
     print(f"Закрытый ключ (x) = {x}")
-    open_key = p, g, y
-    print(f"Открытый ключ (p, g, y) = {open_key} ")
+    print(f"Открытый ключ (p, g, y) = {p, g, y}")
     print(f"Хеш = {hash_}")
-    separator()
+    separate()
     # Начинаем формирование цифровой подписи
     print(f"{k = }, {r = }, Обратный элемент k = {pow(k, -1, p - 1)}, {s = } ")
-    signs = text, r, s
-    print("Цифровая подпись (Сообщение, r, s) = ", signs)
-    separator()
+    digital_sign = text, r, s
+    print("Цифровая подпись (Сообщение, r, s) = ", digital_sign)
+    separate()
+    return y, r, p, s, x, g, key, hash_
+
+
+def check_sign_and_secret_messg(hash_, hash_again, y, r, p, s, x, g, key):
     # Проверяем подлинность подписи
+    ok = u'\u2713'  # значок галочки
     print("Проверка подписи: ")
     print(f"Проверка хеша = {hash_again} ")
     if hash_again == hash_:
@@ -113,26 +111,32 @@ def sign(p, x, g, k, hash_, text, key):
             if key == 'secret':
                 secret_message = pow(s, -1, p - 1) * pow(hash_again - (x * r), 1, p - 1) % (p - 1)
                 print(f"Получаем скрытое сообщение: {secret_message}")
+                return secret_message
         else:
             print("Неверная цифровая подпись")
             exit()
     else:
         print("Неверная цифровая подпись")
         exit()
+    pass
 
 
 if __name__ == "__main__":
-    separator()
+    separate()
     print("Сначала просто сделаем электронную подпись: ")
     text_1 = "Privet medved"
     print(f'Наш текст, для которого применяем электронную подпись: {text_1}')
-    hash_1 = int(sha512(text_1.encode("utf-8")).hexdigest(), 16) % 10 ** 5
-    sign(11, 3, 0, 0, hash_1, text_1, key='no_secret')  # При g = 0, k = 0 включается генератор!
-    separator()
+    hash__ = int(sha512(text_1.encode("utf-8")).hexdigest(), 16) % 10 ** 5
+    y0, r0, p0, s0, x0, g0, k0, hash__1 = create_sign(p=11, x=3, g=0, k=0, hash_=hash__, text=text_1, key='no_secret')
+    print('Теперь проверим подпись')
+    check_sign_and_secret_messg(hash_=hash__1, hash_again=hash__1, y=y0, r=r0, p=p0, s=s0, x=x0, g=g0, key=k0)
+    separate()
     print("Теперь делаем передачу закрытого сообщения используя подпись: ")
     text_2 = "Privet"
     print(f'Наш текст, для которого применяем электронную подпись: {text_2}')
     hash_2 = int(sha512(text_2.encode("utf-8")).hexdigest(), 16) % 10 ** 5
-    sign(11, 3, 0, 255, hash_2, text_2, key='secret')  # При g = 0 включается генератор!
-    separator()
+    y1, r1, p1, s1, x1, g1, k1, hash__2 = create_sign(p=11, x=3, g=0, k=123, hash_=hash_2, text=text_2, key='secret')
+    print('Теперь проверим подпись (и найдем секретное сообщение)')
+    check_sign_and_secret_messg(hash_=hash__2, hash_again=hash__2, y=y1, r=r1, p=p1, s=s1, x=x1, g=g1, key=k1)
+    separate()
     exit()
