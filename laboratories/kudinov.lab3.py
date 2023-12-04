@@ -6,29 +6,29 @@ def rect_wave(t, period):
     return numpy.where(numpy.logical_and(t >= -period / 4, t <= period / 4), 1, 0)
 
 
-def compute_inner_product(period1, period2, duration, shift):
-    t = numpy.linspace(-duration / 2, duration / 2, 1000)
-    wave1 = rect_wave(t - shift, period1)
-    wave2 = rect_wave(t, period2)
+def model(period_1, period_2, duration, shift):
+    t = numpy.linspace(-duration / 2, duration / 3, 2000)
+    wave1 = rect_wave(t - shift, period_1)
+    wave2 = rect_wave(t, period_2)
     inner_product = numpy.sum(wave1 * wave2)
     return inner_product
 
 
-def orthogonal_rect_waves(period1, period2, duration, shift):
-    inner_product = compute_inner_product(period1, period2, duration, shift)
+def orthogonal_rect_waves(period_1, period_2, duration, shift):
+    inner_product = model(period_1, period_2, duration, shift)
     if numpy.isclose(inner_product, 0):
         print("Волны ортогональны")
         linestyle = '--'
     else:
         print("Волны не ортогональны")
         linestyle = '--'
-    t = numpy.linspace(-duration / 2, duration / 2, 1000)
-    wave1 = rect_wave(t - shift, period1)
-    wave2 = rect_wave(t, period2)
+    t = numpy.linspace(-duration / 2, duration / 3, 2000)
+    wave1 = rect_wave(t - shift, period_1)
+    wave2 = rect_wave(t, period_2)
     pyplot.figure(figsize=(10, 6))
     pyplot.subplot(211)
-    pyplot.plot(t, wave1, color='black', linestyle=linestyle, label=f'Волна 1 (период = {period1})')
-    pyplot.plot(t, wave2, color='blue', linestyle=linestyle, label=f'Волна 2 (период = {period2})')
+    pyplot.plot(t, wave1, color='black', linestyle=linestyle, label=f'Волна 1 (период = {period_1})')
+    pyplot.plot(t, wave2, color='blue', linestyle=linestyle, label=f'Волна 2 (период = {period_2})')
     pyplot.xlabel('t')
     pyplot.ylabel('Амплитуда')
     pyplot.title('Ортогональные прямоугольные волны со сдвигом во времени')
@@ -44,10 +44,12 @@ def orthogonal_rect_waves(period1, period2, duration, shift):
     pyplot.grid(True)
     pyplot.tight_layout()
     pyplot.show()
+
+
 period1 = 1
-period2 = 2
-duration = 4
-shift = 0.5
-inner_product = compute_inner_product(period1, period2, duration, shift)
-print (f'Значение интеграла произведения волн: {inner_product}')
-orthogonal_rect_waves(period1, period2, duration, shift)
+period2 = 4
+duration_1 = 10
+shift_1 = 0.5
+result = model(period1, period2, duration_1, shift_1)
+print (f'Значение интеграла произведения волн: {result}')
+orthogonal_rect_waves(period1, period2, duration_1, shift_1)
