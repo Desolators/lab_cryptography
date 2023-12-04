@@ -15,8 +15,8 @@ def model(period_1, period_2, duration, shift):
 
 
 def orthogonal_rect_waves(period_1, period_2, duration, shift):
-    inner_product = model(period_1, period_2, duration, shift)
-    if numpy.isclose(inner_product, 0):
+    result = model(period_1, period_2, duration, shift)
+    if numpy.isclose(result, 0):
         print("Волны ортогональны")
     else:
         print("Волны не ортогональны")
@@ -48,6 +48,6 @@ period1 = 1
 period2 = 4
 duration_1 = 10
 shift_1 = 0.5
-result = model(period1, period2, duration_1, shift_1)
-print (f'Значение интеграла произведения волн: {result}')
+result_1 = model(period1, period2, duration_1, shift_1)
+print (f'Значение интеграла произведения волн: {result_1}')
 orthogonal_rect_waves(period1, period2, duration_1, shift_1)
