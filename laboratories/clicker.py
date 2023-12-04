@@ -5,7 +5,7 @@ import win32api
 import win32con
 
 
-def cursor_pos(x, y):
+def set_cursor_pos(x, y):
     win32api.SetCursorPos((x, y))
 
 
@@ -16,12 +16,12 @@ def click(x, y):
 
 
 def click_1(x, y):
-    cursor_pos(x, y)
+    set_cursor_pos(x, y)
     click(x, y)
 
 
 def double_click(x, y):
-    cursor_pos(x, y)
+    set_cursor_pos(x, y)
     click(x, y)
     click(x, y)
 
@@ -36,25 +36,25 @@ def show_window(hwnd):
     win32gui.SetForegroundWindow(name)
 
 
-def coord_window(hwnd):
+def find_coord_window(hwnd):
     name = find_window(hwnd)
     return win32gui.GetWindowRect(name)
 
 
-def coords_x():
-    coords_window = coord_window("Дифференциальный криптоанализ")  # Дифференциальный/Линейный
+def find_coords_x():
+    coords_window = find_coord_window("Дифференциальный криптоанализ")  # Дифференциальный/Линейный
     x_const = int(coords_window[0])
     return x_const
 
 
-def coords_y():
-    coords_window = coord_window("Дифференциальный криптоанализ")  # Дифференциальный/Линейный
+def find_coords_y():
+    coords_window = find_coord_window("Дифференциальный криптоанализ")  # Дифференциальный/Линейный
     y_const = int(coords_window[1])
     return y_const
 
 
 def window_checker(false_name, true_name, x, y):
-    cursor_pos(x, y)
+    set_cursor_pos(x, y)
     click(x, y)
     if find_window(false_name):
         keyboard.send("escape")
@@ -69,16 +69,16 @@ a = [0] * key
 show_window("Дифференциальный криптоанализ")  # Дифференциальный/Линейный
 
 for j in range(key):
-    click_1(coords_x() + 39 + (28 * j), coords_y() + 454)  # coords_y() + 388 (Линейный) + 454 (Дифф)
+    click_1(find_coords_x() + 39 + (28 * j), find_coords_y() + 454)  # find_coords_y() + 388 (Линейный) + 454 (Дифф)
 
 for k in range(2 ** (len(a))):
     j = len(a) - 1
     while j >= 0 and a[j] == 1:
         a[j] = 0
-        double_click(coords_x() + 39 + (28 * j), coords_y() + 454)  # coords_y() + 388 (Линейный) + 454 (Дифф)
+        double_click(find_coords_x() + 39 + (28 * j), find_coords_y() + 454)  # find_coords_y() + 388 (Линейный) + 454 (Дифф)
         j -= 1
     if j >= 0 and a[j] == 0:
         a[j] = 1
-        click_1(coords_x() + 39 + (28 * j), coords_y() + 454)  # coords_y() + 388 (Линейный) + 454 (Дифф)
-    window_checker("ошибка", "информация", coords_x() + 80, coords_y() + 619)
-    # window_checker coords_y() + 571 (Линейный) + 619 (Дифф)
+        click_1(find_coords_x() + 39 + (28 * j), find_coords_y() + 454)  # find_coords_y() + 388 (Линейный) + 454 (Дифф)
+    window_checker("ошибка", "информация", find_coords_x() + 80, find_coords_y() + 619)
+    # window_checker find_coords_y() + 571 (Линейный) + 619 (Дифф)
