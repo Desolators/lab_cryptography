@@ -1,13 +1,16 @@
 from copy import deepcopy
-shifr = ("isfptitekthhcxatwbsipppdlmmweujgdtxhuaaxxxlelwegseedrzwegspxsfkjwawiljvotcxsxatjxcgxprwppevptsrxhwetjmwmfprwp"
-         "hxttftptcgadprhimipxshhlrnesgwmlhtbgmmilbgxrnekswhufhpvwuigrigxrxuixilbvlexjxisaxqltifthadpedatchxmmliigriujx"
-         "tqyksighmzwmgvlxsmieiwwmlqvnhltchipwlthbieedrzilxisibsliteprdgiitemthmwiheikpxbdrwxhbiezpmgrsfeekthmwibcwbvrb"
-         "umvprmllbiippwathlivxpopxxailxuekgitrlbckvdrmxrxcxhuygllbiippwathytrvtegswtihhlrhcemgixqsqsmlrsngezthcxqvpqxh"
-         "obetbckhjxtixatktiipxxapxbcttxptchlxrzxrzqyyueedktawugmgvmgvatiikuvhbxatxhlrijqiwewppppclqixcltiiyjppdvdxrmdq"
-         "ltcxhfxusktfnirhlmmsmwcsmhxkxoxwmfhsatvxbifqikthmwemilxgippwvdqiprrpxmwiijqillbiifjptixhprwcizgsudclprwvmkawp"
-         "tvxppppclilxgippmmxrzilxxvmjvghvxhxbckmgewxrzeptnxaxrzhunpvktpexrzumzwxbcklzcepvdxrzprwwiktqxbfxgiwiltieeilhj"
-         "kailxeyfeathsgactwygsvxsegsjbuxrnekswhujcxqgtzxgkhiftropxxapfnroxisylemtvnchxgegwsngegsiotrmwighsftfhscztrxge"
-         "eacaphmdkhpjmtvaxq")
+shifr = (
+    "wofuqmoxgsokucfvhhrntzhreccilccurihktfkzivvzhkwwtobuwwgklcqyxzritbhytpcplogtpzzvsvoehszrcrhytuwiaufviszytvouawhka"
+    "shfqwhvpbrkdpfvpyoescbttkvvcufvphrvpfhyuszcdbhytzoesvs"
+    "tdizucczfcusiefctjfsvksbupwzpqfsrsbcnlvsewshydiuyicjvghvzhpmexuvkxbvzhpsupbrkdggvsopfjhwewwgrclwvimvvvfcrcsrrcrgr"
+    "xrhfwwgnxtsnwohzhhcstqcdtctlhvcnpfsnthcwtsrfjfdfdfqyx"
+    "zritbkytbkvcczfcusiwojvpbmkwwbxtjseucffjfgvajsjxzzktzzpdikyphvlhpoesobjlsfvshvvlcarcsoiamhfbcfidkafgbwevksnxzzkp"
+    "yskwsqyxzritbcliwbkdhvvucfvhhhflvsitwhzhhvvivwtzsgkivsitksnxzz"
+    "cxuvkptwittciivsdpbrxxjsvpqvfuhvvbcbvbcfvewsttctsgsoupbrkwsbntkwcauckdciilcfbpbrctojvivsdpzcethvvnkwcabckuwbuivs"
+    "npmvfbsoxpwbrcrkvhvocapsixrcwivsdcckzusgrxrhytaoexkwcabckschyp"
+    "hvflqoexpsrghcctojvbmqyxzritbocdbszchvvucfvhhhytkwcsobzbozjlcicsgcfcqcdtobuisoiivsdicdztqsjdmcluccchowuhvskwsbnt"
+    "aijiozcuciiswsfuvievsfpdiarnogntzzgaobvivsgaobbhtcidiftdttzcgo"
+    "esgvvastkwwaeddsrrsieiwzytqcehsbktrpliwtvtzjvgmgfgfmwdfhytdcfgqvzarfvcozcivsjpasjpwrkwsarc")
 alp = "abcdefghijklmnopqrstuvwxyz"
 dict_alp = {'a': [0, 0], 'b': [0, 1], 'c': [0, 2], 'd': [0, 3], 'e': [0, 4], 'f': [0, 5], 'g': [0, 6], 'h': [0, 7],
             'i': [0, 8], 'j': [0, 9], 'k': [0, 10], 'l': [0, 11], 'm': [0, 12], 'n': [0, 13], 'o': [0, 14], 'p': [0, 15],
@@ -69,7 +72,7 @@ for i in range(len(shifr)):
     current_element = shifr[i]
     for j in range(start, len(key_vizener)):
         current_element = (dict_alp[current_element][1] - key_vizener[j]) % 26
-        if current_element:
+        if current_element >= 0:
             otvet[i] = alp[current_element]
         start += 1
         break
