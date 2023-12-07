@@ -68,7 +68,7 @@ def create_sign(p, x, g, k, hash_, text, key):
         y = create_y(g, x, p)
         k = generate_k(2, p)
         r = pow(g, k, p)
-        s = (hash_ - x * r) * po(k, -1, p - 1) % (p - 1)
+        s = (hash_ - x * r) * pow(k, -1, p - 1) % (p - 1)
     elif g != 0 and key == 'no_secret':  # при этом условии стартовые значения подаются из входа функции
         y = create_y(g, x, p)
         r = pow(g, k, p)
