@@ -1,5 +1,4 @@
 from sys import set_int_max_str_digits as mas_str
-
 mas_str(0)
 
 
