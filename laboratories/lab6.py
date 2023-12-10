@@ -171,8 +171,8 @@ if __name__ == "__main__":
                                 key='no_secret', M=2205)
     print("Теперь делаем передачу закрытого сообщения используя подпись( Задание 4): ")
     hash_2 = second_alogrithm_hash(2149163449, 1989582461)
-    g_4 = find_primitive_root(2149163449)
-    y1, r1, p1, s1, x1, g1, k1, hash__2, M_2 = create_sign(p=2149163449, x=28, g=5, k=304792915, hash_=hash_2,
+    g_4 = find_primitive_root(3074929199)
+    y1, r1, p1, s1, x1, g1, k1, hash__2, M_2 = create_sign(p=3074929199, x=28, g=5, k=2149163449, hash_=hash_2,
                                                            text=1989582461, key='secret', M=1989582461)
     print('Теперь проверим подпись (и найдем секретное сообщение)')
     check_sign_and_secret_messg(hash_=hash__2, hash_again=hash__2, y=y1, r=r1, p=p1, s=s1, x=x1, g=g1, key='secret',
