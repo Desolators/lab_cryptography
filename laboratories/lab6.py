@@ -77,16 +77,16 @@ def create_sign(p, x, g, k, hash_, text, key, M=0):
         s = (hash_ - x * r) * pow(k, -1, p - 1) % (p - 1)
     if g == 0 and key == 'secret':  # включаем генератор и используем в качестве K - секретное сообщение
         secrets = k
-        print(f"Скрытое сообщние = {secrets}")
         generator = hash_p_x_g_r_s_simple_generate(hash_, secrets, M)
         p, x, g, r, s, M = generator
         y = create_y(g, x, p)
+        print(f"Скрытое сообщние = {secrets}")
     elif g != 0 and key == 'secret':  # при этом условии берем значения из входа функции
         secrets = k
-        print(f"Скрытое сообщние = {secrets}")
         y = create_y(g, x, p)
         r = pow(g, secrets, p)
         s = pow((M - x * r) * pow(secrets, -1, p - 1), 1, p - 1)
+        print(f"Скрытое сообщние = {secrets}")
     print(f"Закрытый ключ (x) = {x}")
     print(f"Открытый ключ (p, g, y) = {p, g, y}")
     print(f"Хеш = {hash_}")
