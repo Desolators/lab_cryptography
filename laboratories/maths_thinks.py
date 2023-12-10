@@ -1,3 +1,8 @@
+from sys import set_int_max_str_digits as mas_str
+
+mas_str(0)
+
+
 def fibonacci(n):
     if n <= 1:
         return n
@@ -8,6 +13,3 @@ def fibonacci(n):
         n1, n2 = n2, result
         count += 1
     return result
-
-
-print(fibonacci(10))
