@@ -1,6 +1,6 @@
-from random import randint
 from math import ceil
 from math import sqrt
+from random import randint
 
 
 def separate():
@@ -55,8 +55,8 @@ def alg_fact_ferma(N):
 def encryption(*args, x, key):
     if key == "task_1":
         e, N = args
-        print(f"X = {x}, {e = }, {N = }")
         y = pow(x, e, N)
+        print(f"X = {x}, {e = }, {N = }")
         print(f"Ответ: Y = {y} ")
         return y, e
 
@@ -64,9 +64,11 @@ def encryption(*args, x, key):
         p, q = args
         N = p * q
         fn = (p - 1) * (q - 1)
-        print(f"{p = }, {q = }, {N = }, φ(N) = {fn}")
-        e1, d1, e2 = find_keys_automate(fn)
+        e1, d1, e2, d2 = find_keys_automate(fn)
         y = pow(x, e1, N)
+        print(f"{p = }, {q = }, {N = }, φ(N) = {fn}")
+        print(f"{e1 = }, {e2 = }")
+        print(f"{d1 = }, {d2 = }")
         print(f"X = {x}")
         print(f"Y = {y} ")
         return y, e1, d1, e2, N
@@ -74,11 +76,11 @@ def encryption(*args, x, key):
     if key == "rand":
         p, q = args
         N = p * q
-        print(f"{p = }, {q = }, {N = }")
         e1, d1, e2 = find_keys_p_q_rand(p, q)
+        y1, y2 = pow(x, e1, N), pow(x, e2, N)
+        print(f"{p = }, {q = }, {N = }")
         print(f"d = {d1}")
         print(f"X = {x}")
-        y1, y2 = pow(x, e1, N), pow(x, e2, N)
         print(f"Y1 = {y1}, Y2 = {y2}")
         return y1, e1, d1, e2, y2, N
 
@@ -89,19 +91,17 @@ def find_keys_automate(fn):
     while e1 == d1 or e2 == d2:
         e1, e2 = open_key_search(fn), open_key_search(fn)
         d1, d2 = pow(e1, -1, fn), pow(e2, -1, fn)
-    print(f"{e1 = }, {e2 = }")
-    print(f"{d1 = }, {d2 = }")
-    return e1, d1, e2
+    return e1, d1, e2, d2
 
 
 def find_keys_p_q_rand(p, q):
     fn = (p - 1) * (q - 1)
-    print(f"φ(N) = {fn}")
     e1, e2 = (open_key_search(fn)), (open_key_search(fn))
     d1, d2 = pow(e1, -1, fn), pow(e2, -1, fn)
     while e1 == d1 or e2 == d2:
         e1, e2 = open_key_search(fn), open_key_search(fn)
         d1, d2 = pow(e1, -1, fn), pow(e2, -1, fn)
+    print(f"φ(N) = {fn}")
     print(f"{e1 = }, {e2 = }")
     print(f"{d1 = }, {d2 = }")
     return e1, d1, e2
@@ -110,9 +110,9 @@ def find_keys_p_q_rand(p, q):
 def find_keys_ferma(e, N):
     p, q = alg_fact_ferma(N)
     fn = (p - 1) * (q - 1)
+    d = pow(e, -1, fn)
     print(f"p = {p}, q = {q}, {N = }, φ(N) = {fn}")
     print(f"{e = }")
-    d = pow(e, -1, fn)
     print(f"Ответ: {d = }")
     return d
 
@@ -124,30 +124,30 @@ def decryption(y, d, N):
 
 
 def re_encryption(y, e, N, x0=2):
-    print(f"Y = {y}, {e = }, {N = }")
     while pow(x0, e, N) != y:
         x0 += 1
+    print(f"Y = {y}, {e = }, {N = }")
     print(f"Методом перешифрования получаем исходный текст, Ответ x = {x0}")
     return x0
 
 
 def re_encryption_or_krmd(y_0, e, N):
-    print(f"Y = {y_0}, {e = }, {N = }")
     y = y_0
     while y_0 != pow(y, e, N):
         y = (pow(y, e, N))
+    print(f"Y = {y_0}, {e = }, {N = }")
     print(f"(методом перешифрования или бесключевое чтение с одним открытым ключом) Ответ: X = {y}")
     return y
 
 
 def keyless_reading(y1, y2, e1, e2, N):
-    print(f"Y1 = {y1}, Y2 = {y2}")
-    print(f"{e1 = }, {e2 = }, {N = }")
     _, r, s = gcd(e1, e2)
     if (e1 * r) + (e2 * s) != 1:
         r, s = s, r
-    print(f"{r = }, {s = }")
     x = pow(y1, r, N) * pow(y2, s, N) % N
+    print(f"Y1 = {y1}, Y2 = {y2}")
+    print(f"{e1 = }, {e2 = }, {N = }")
+    print(f"{r = }, {s = }")
     print(f"(методом бесключевого чтения) Ответ: X = {x}")
     return x
 
