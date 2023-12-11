@@ -1,15 +1,11 @@
 from laboratories.libraries import click
-
 key = 10
 start_position = [0] * key
 a = [0] * key
-
 click.show_window("Дифференциальный криптоанализ")  # Дифференциальный/Линейный
-
 for j in range(key):
     click.click_1(click.find_coords_x() + 39 + (28 * j),
                   click.find_coords_y() + 454)  # find_coords_y() + 388 (Линейный) + 454 (Дифф)
-
 for k in range(2 ** (len(a))):
     j = len(a) - 1
     while j >= 0 and a[j] == 1:
