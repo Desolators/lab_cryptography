@@ -4,7 +4,6 @@ from math import sqrt
 from random import randint
 from sys import set_int_max_str_digits as mas_str
 from sys import setrecursionlimit as mas_rec
-
 mas_rec(2 ** 10)
 mas_str(0)
 
