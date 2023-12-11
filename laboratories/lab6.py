@@ -1,4 +1,4 @@
-import maths_thinks as crypto
+from laboratories.libraries import maths_thinks as crypto
 
 if __name__ == "__main__":
     crypto.separate()

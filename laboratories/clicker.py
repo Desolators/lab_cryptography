@@ -1,4 +1,4 @@
-import click
+from laboratories.libraries import click
 
 key = 10
 start_position = [0] * key
