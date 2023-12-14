@@ -1,10 +1,10 @@
 from time import time
 
-a = [55, 21, 45, 6, 0, 25, 46, 23, 86]
+list_list = [55, 21, 45, 6, 0, 25, 46, 23, 86]
 
 
-def merge_two_list():
-    pass
+def merge_two_list(a, b):
+    return sorted(a + b)
 
 
 def merge_sorte(list_unsorted):
@@ -12,13 +12,9 @@ def merge_sorte(list_unsorted):
         return list_unsorted
     left_list = merge_sorte(list_unsorted[0:len(list_unsorted) // 2])
     right_list = merge_sorte(list_unsorted[len(list_unsorted) // 2: len(list_unsorted)])
-    return sorted(left_list + right_list)
+    return merge_two_list(left_list, right_list)
 
 
-a1 = time()
-print(merge_sorte(a))
-print(time() - a1)
-
-# sort_1 = list_unsorted[0:len(list_unsorted) // 2]
-# sort_2 = list_unsorted[len(list_unsorted) // 2: len(list_unsorted)]
-#
+time_go = time()
+print(merge_sorte(list_list))
+print(time() - time_go)
