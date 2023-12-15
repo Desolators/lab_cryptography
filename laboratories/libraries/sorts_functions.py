@@ -59,7 +59,7 @@ def bubble_sort(list_unsorted):
 
 def count_elem_numbers_and_sort(file):
     unsorted = read_str(file)
-    list_unsorted = list(unsorted)
+    list_unsorted = list(unsorted[0])
     unique_numbers = len(set(list_unsorted))
     count = [0] * unique_numbers
     difference = int(min(list_unsorted))
@@ -76,5 +76,4 @@ def count_elem_numbers_and_sort(file):
 def read_str(file):
     with open(file) as file:
         lines = file.readlines()
-        lines = str(lines[0])
         return lines
