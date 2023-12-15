@@ -1,3 +1,8 @@
+from sys import set_int_max_str_digits
+
+set_int_max_str_digits(0)
+
+
 def merge_two_list(a, b):
     result = []
     i, j = 0, 0
@@ -52,20 +57,23 @@ def bubble_sort(list_unsorted):
     return list_unsorted
 
 
-def count_elem_numbers(list_unsorted):
-    count = [0] * len(set(list_unsorted))
-    for i in range(len(list_unsorted)):
-        current_element = list_unsorted[i]
-        count[current_element - (0 + min(list_unsorted))] += 1
-    return count
+def count_elem_numbers_and_sort(unsorted):
+    list_unsorted = list(unsorted)
+    unique_numbers = len(set(list_unsorted))
+    count = [0] * unique_numbers
+    difference = int(min(list_unsorted))
+    for i in list_unsorted:
+        count[int(i) - difference] += 1
+    nowpos, list_sorted = 0, list_unsorted
+    for val in range(0, unique_numbers):
+        for i in range(count[val]):
+            list_sorted[nowpos] = val + difference
+            nowpos += 1
+    return count, list_sorted
 
 
-def count_sort(count, list_set):
-    result = []
-    list_ = list(set(list_set))
-    for i in range(len(list_)):
-        current_element = count[i]
-        while current_element != 0:
-            result.append(list_[i])
-            current_element -= 1
-    return result
+def read_str(file):
+    with open(file) as file:
+        lines = file.readlines()
+        lines = str(lines[0])
+        return lines
