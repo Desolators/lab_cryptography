@@ -26,3 +26,27 @@ def merge_sorte(list_unsorted):
     left_list = list(merge_sorte(list_unsorted[0:len(list_unsorted) // 2]))
     right_list = list(merge_sorte(list_unsorted[len(list_unsorted) // 2: len(list_unsorted)]))
     return merge_two_list(left_list, right_list)
+
+
+def insert_sort(list_unsorted):
+    for i in range(1, len(list_unsorted)):
+        for j in range(i, 0, -1):
+            if list_unsorted[j] < list_unsorted[j - 1]:
+                list_unsorted[j], list_unsorted[j - 1] = list_unsorted[j - 1], list_unsorted[j]
+    return list_unsorted
+
+
+def choise_sort(list_unsorted):
+    for i in range(0, len(list_unsorted) - 1):
+        for j in range(i + 1, len(list_unsorted)):
+            if list_unsorted[j] <= list_unsorted[i]:
+                list_unsorted[i], list_unsorted[j] = list_unsorted[j], list_unsorted[i]
+    return list_unsorted
+
+
+def bubble_sort(list_unsorted):
+    for i in range(1, len(list_unsorted)):
+        for j in range(0, len(list_unsorted) - i):
+            if list_unsorted[j] < list_unsorted[j + 1]:
+                list_unsorted[j], list_unsorted[j + 1] = list_unsorted[j + 1], list_unsorted[j]
+    return list_unsorted
