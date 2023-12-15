@@ -57,7 +57,8 @@ def bubble_sort(list_unsorted):
     return list_unsorted
 
 
-def count_elem_numbers_and_sort(unsorted):
+def count_elem_numbers_and_sort(file):
+    unsorted = read_str(file)
     list_unsorted = list(unsorted)
     unique_numbers = len(set(list_unsorted))
     count = [0] * unique_numbers
