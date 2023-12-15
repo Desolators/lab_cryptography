@@ -50,3 +50,22 @@ def bubble_sort(list_unsorted):
             if list_unsorted[j] < list_unsorted[j + 1]:
                 list_unsorted[j], list_unsorted[j + 1] = list_unsorted[j + 1], list_unsorted[j]
     return list_unsorted
+
+
+def count_elem_numbers(list_unsorted):
+    count = [0] * len(set(list_unsorted))
+    for i in range(len(list_unsorted)):
+        current_element = list_unsorted[i]
+        count[current_element - (0 + min(list_unsorted))] += 1
+    return count
+
+
+def count_sort(count, list_set):
+    result = []
+    list_ = list(set(list_set))
+    for i in range(len(list_)):
+        current_element = count[i]
+        while current_element != 0:
+            result.append(list_[i])
+            current_element -= 1
+    return result
