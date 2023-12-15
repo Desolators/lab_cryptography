@@ -1,5 +1,4 @@
 from sys import set_int_max_str_digits
-
 set_int_max_str_digits(0)
 
 
@@ -65,11 +64,11 @@ def count_elem_numbers_and_sort(file):
     difference = int(min(list_unsorted))
     for i in list_unsorted:
         count[int(i) - difference] += 1
-    nowpos, list_sorted = 0, list_unsorted
+    currentpos, list_sorted = 0, list_unsorted
     for val in range(0, unique_numbers):
         for i in range(count[val]):
-            list_sorted[nowpos] = val + difference
-            nowpos += 1
+            list_sorted[currentpos] = val + difference
+            currentpos += 1
     return count, list_sorted
 
 
