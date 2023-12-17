@@ -324,7 +324,7 @@ def first_algorithm_hash(message, p, alphabet):
 def second_alogrithm_hash(p, message):
     h_result = 0
     h_i = len(str(message))
-    for elem in str(message):
-        h_result = pow(int(elem) + 2 * h_i + 1, 2, p - 1)
+    for digit in str(message):
+        h_result = pow(int(digit) + 2 * h_i + 1, 2, p - 1)
         h_i = h_result
     return h_result + 1
