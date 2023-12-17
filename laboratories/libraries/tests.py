@@ -1,22 +1,10 @@
-# stroka = (
-#     'ajtyjfhergeruylgsfdfweqfwwwwwwwwwwwwwwwwwwdsafcxbcvmjnyrfgjwhkegljewrpogk;ldkglfdjglkskd;lfkds;lfksd;'
-#     'lfk;lsdkfl;sdkfsdkfklklklklklklyywfadasffdhgfjlkyuityulrtfyghjkl;kojihugyftdrfghjkl;[ppoiutrewasxdfcgvhbjnkml;egd')
-# dict_count = {}
-# for elem in stroka:
-#     if elem not in dict_count:
-#         dict_count[elem] = 0
-#     dict_count[elem] += 1
-# a1, a2 = list(dict_count.values()), list(dict_count.keys())
-# print(f'{a2[a1.index(max(a1))]} = {max(a1)}')
-
-
-a = []
-b = []
-max = len(a)
-if max == 0 or len(b) == 0:
-    print('Последовательности должны быть одинаковыми')
-    exit()
-result = []
-for k in range(max):
-    result.append(a[k] + b[k])
-print(sum(result))
+stroka = (
+    'ajtyjfhergeruylgsfdfweqfwwwwwwwwwwwwwwwwwwdsafcxbcvmjnyrfgjwhkegljewrpogk;ldkglfdjglkskd;lfkds;lfksd;'
+    'lfk;lsdkfl;sdkfsdkfklklklklklklyywfadasffdhgfjlkyuityulrtfyghjkl;kojihugyftdrfghjkl;[ppoiutrewasxdfcgvhbjnkml;egd')
+dict_count = {}
+for elem in stroka:
+    if elem not in dict_count:
+        dict_count[elem] = 0
+    dict_count[elem] += 1
+a1, a2 = list(dict_count.values()), list(dict_count.keys())
+print(f'{a2[a1.index(max(a1))]} = {max(a1)}')
