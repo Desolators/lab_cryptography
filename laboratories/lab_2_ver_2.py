@@ -17,7 +17,7 @@ dict_alp = {'a': [0, 0], 'b': [0, 1], 'c': [0, 2], 'd': [0, 3], 'e': [0, 4], 'f'
             'q': [0, 16], 'r': [0, 17], 's': [0, 18], 't': [0, 19], 'u': [0, 20], 'v': [0, 21], 'w': [0, 22],
             'x': [0, 23], 'y': [0, 24], 'z': [0, 25]}
 key = int(input("Enter key: "))
-list_of_nested_dictionaries = [deepcopy(dict_alp) for i in range(key)]
+list_of_nested_dictionaries = [deepcopy(dict_alp) for dictionary in range(key)]
 lens = [0] * key
 for i in range(len(shifr)):
     column_number = i % key
@@ -25,7 +25,7 @@ for i in range(len(shifr)):
     if shifr[i]:
         list_of_nested_dictionaries[column_number][current_element][0] += 1
         lens[column_number] += 1
-freq = [list(list_of_nested_dictionaries[i].values()) for i in range(key)]
+freq = [list(list_of_nested_dictionaries[dictionary].values()) for dictionary in range(key)]
 count_sdvig = [[0] for i in range(key - 1)]
 umnoz_so_sdvigom = [[0] * len(dict_alp) for i in range(key)]
 for k in range(len(umnoz_so_sdvigom) - 1):
