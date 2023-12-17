@@ -63,7 +63,7 @@ for k in range(len(key_vizener)):
     current_element = key_vizener[k]
     if key_vizener[k]:
         key_vizener[k] = dict_alp[current_element][1]
-otvet = [""] * len(shifr)
+otvet = [0] * len(shifr)
 start = 0
 for i in range(len(shifr)):
     if start > (key - 1):
@@ -75,4 +75,4 @@ for i in range(len(shifr)):
             otvet[i] = alp[current_element]
         start += 1
         break
-print("Plain text: ", *otvet, sep="")
+print("Plain text: ", *otvet, sep='')
