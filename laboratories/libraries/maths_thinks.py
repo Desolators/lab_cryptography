@@ -316,19 +316,15 @@ def check_sign_and_secret_messg(hash_, hash_again, y, r, p, s, g, key, x=0):
 
 def first_algorithm_hash(message, p, alphabet):
     h_current = len(message)
-    for i in range(len(message)):
-        index_current = message[i]
-        current_h = alphabet[index_current]
-        h_current = pow(h_current + current_h, 2, p)
+    for elem in message:
+        h_current = pow(h_current + alphabet[elem], 2, p)
     return h_current
 
 
 def second_alogrithm_hash(p, message):
     h_result = 0
-    h_0 = len(str(message))
-    h_current = str(message)
-    for i in range(len(str(message))):
-        h_now = int(h_current[i])
-        h_result = pow(h_now + 2 * h_0 + 1, 2, p - 1)
+    h_current, h_0 = str(message), len(str(message))
+    for elem in h_current:
+        h_result = pow(int(elem) + 2 * h_0 + 1, 2, p - 1)
         h_0 = h_result
     return h_result + 1
