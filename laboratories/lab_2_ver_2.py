@@ -31,8 +31,7 @@ umnoz_so_sdvigom = [[0] * len(dict_alp) for i in range(key)]
 for k in range(len(umnoz_so_sdvigom) - 1):
     if k > (key - 1):
         k -= 1
-    index = 0
-    count = 0
+    index, count = 0, 0
     while index <= 0.059:
         tmp = freq[k + 1][len(dict_alp) - 1][0]
         for h in range(len(dict_alp) - 2, -1, -1):
