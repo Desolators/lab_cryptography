@@ -196,7 +196,7 @@ def generate_simple_number_p(p):
 
 
 def find_primitive_root(p):
-    g = randint(2, generate_simple_number_p(4))
+    g = randint(2, p // 2)
     fn = (p - 1)
     while pow(g, fn // 2, p) == 1:
         g += 1
