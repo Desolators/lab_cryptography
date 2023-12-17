@@ -27,6 +27,7 @@ if __name__ == "__main__":
     crypto.check_sign_and_secret_messg(hash_=hash_4, hash_again=hash_4, y=y1, r=r1, p=p1, s=s1, x=x1, g=g1,
                                        key=k1)
     crypto.separate()
+
     print("Теперь делаем передачу закрытого сообщения используя подпись(со случайно сгенерированными значениями): ")
     secret = 102451
     M = randint(2, secret)
