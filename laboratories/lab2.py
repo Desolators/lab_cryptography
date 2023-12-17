@@ -74,4 +74,5 @@ for k in range(len(shifr)):
             otvet[k] = alp[index_current]
         start += 1
         break
+
 print("Plain text: ", *otvet, sep="")
