@@ -4,6 +4,7 @@ from math import sqrt
 from random import randint
 from sys import set_int_max_str_digits as mas_str
 from sys import setrecursionlimit as mas_rec
+
 mas_rec(2 ** 10)
 mas_str(0)
 
@@ -190,7 +191,7 @@ def keyless_reading(y1, y2, e1, e2, N):
 
 def generate_simple_number_p(p):
     while not check_prime(p):
-        p = randint(25_000_000, 55_000_000)
+        p = randint(25_000_000_000, 55_000_000_000)
     return p
 
 
@@ -220,22 +221,32 @@ def generate_k(k, p):
     return k
 
 
-def hash_p_x_g_r_s_simple_generate(hash_, k, M=0):
-    p, x, g, r, s = 0, 0, 0, 0, 0
+def hash_p_x_g_r_s_simple_generate(k, text):
+    p, x, g, r, s, hash_ = 0, 0, 0, 0, 0, 0
     while gcd(k, p) != 1 or gcd(hash_, p) != 1 or not check_prime(p) or gcd(s, p - 1) != 1 or gcd(k, p - 1) != 1:
         p = generate_simple_number_p(4)
+        hash_ = second_alogrithm_hash(text, p)
         if gcd(k, p - 1) == 1:
             x = randint(2, p - 3)
             g = find_primitive_root(p)
             r = pow(g, k, p)
-            if M != 0:
-                s = pow((M - x * r) * pow(k, -1, p - 1), 1, p - 1)
-            else:
-                s = (hash_ - x * r) * pow(k, -1, p - 1) % (p - 1)
-    return p, x, g, r, s, M
+            s = (hash_ - x * r) * pow(k, -1, p - 1) % (p - 1)
+    return p, x, g, r, s, hash_
 
 
-def create_sign(p, x, g, k, hash_, text, key, M=0):
+def hash_x_g_r_s_simple_generate(k, p, text):
+    x, g, r, s = 0, 0, 0, 0
+    hash_ = second_alogrithm_hash(text, p)
+    while gcd(k, p) != 1 or gcd(hash_, p) != 1 or not check_prime(p) or gcd(s, p - 1) != 1 or gcd(k, p - 1) != 1:
+        if gcd(k, p - 1) == 1:
+            x = randint(2, p - 3)
+            g = find_primitive_root(p)
+            r = pow(g, k, p)
+            s = (hash_ - x * r) * pow(k, -1, p - 1) % (p - 1)
+    return x, g, r, s, hash_
+
+
+def create_sign(p=0, x=0, g=0, k=0, text=0, key=0, dictionary=0, hash_=0):
     separate()
     separate()
     y, r, s = 0, 0, 0
@@ -246,6 +257,7 @@ def create_sign(p, x, g, k, hash_, text, key, M=0):
         y = create_y(g, x, p)
         k = generate_k(2, p)
         r = pow(g, k, p)
+        hash_ = first_algorithm_hash(text, p, dictionary)
         s = (hash_ - x * r) * pow(k, -1, p - 1) % (p - 1)
     elif g != 0 and key == 'no_secret':  # при этом условии стартовые значения подаются из входа функции
         y = create_y(g, x, p)
@@ -253,15 +265,19 @@ def create_sign(p, x, g, k, hash_, text, key, M=0):
         s = (hash_ - x * r) * pow(k, -1, p - 1) % (p - 1)
     if g == 0 and key == 'secret':  # включаем генератор и используем в качестве K - секретное сообщение
         secrets = k
-        generator = hash_p_x_g_r_s_simple_generate(hash_, secrets, M)
-        p, x, g, r, s, M = generator
+        if p == 0:
+            generator = hash_p_x_g_r_s_simple_generate(secrets, text)
+            p, x, g, r, s, hash_ = generator
+        else:
+            generator = hash_x_g_r_s_simple_generate(secrets, p, text)
+            x, g, r, s, hash_ = generator
         y = create_y(g, x, p)
         print(f"Скрытое сообщние = {secrets}")
     elif g != 0 and key == 'secret':  # при этом условии берем значения из входа функции
         secrets = k
         y = create_y(g, x, p)
         r = pow(g, secrets, p)
-        s = pow((M - x * r) * pow(secrets, -1, p - 1), 1, p - 1)
+        s = (hash_ - x * r) * pow(k, -1, p - 1) % (p - 1)
         print(f"Скрытое сообщние = {secrets}")
     print(f"Закрытый ключ (x) = {x}")
     print(f"Открытый ключ (p, g, y) = {p, g, y}")
@@ -269,34 +285,25 @@ def create_sign(p, x, g, k, hash_, text, key, M=0):
     separate()
     # Начинаем формирование цифровой подписи
     print(f"{k = }, {r = }, Обратный элемент k = {pow(k, -1, p - 1)}, {s = } ")
-    if key == 'no_secret':
-        digital_sign = text, r, s
-        print("Цифровая подпись (Сообщение, r, s) = ", digital_sign)
-        separate()
-    elif key == 'secret':
-        digital_sign = M, r, s
-        print("Цифровая подпись (Сообщение, r, s) = ", digital_sign)
-        separate()
-    return y, r, p, s, x, g, key, hash_, M
+    digital_sign = text, r, s
+    print("Цифровая подпись (Сообщение, r, s) = ", digital_sign)
+    separate()
+    return y, r, p, s, x, g, key, hash_
 
 
-def check_sign_and_secret_messg(hash_, hash_again, y, r, p, s, x, g, key, M=0):
+def check_sign_and_secret_messg(hash_, hash_again, y, r, p, s, g, key, x=0):
     # Проверяем подлинность подписи
     ok = u'\u2713'  # значок галочки
     print("Проверка подписи: ")
     print(f"Проверка хеша = {hash_again} ")
     if hash_again == hash_:
         print(f"Получаем один и тот же хеш: {hash_again} = {hash_}")
-        if key == 'no_secret':
-            condition_1 = pow(y, r, p) * pow(r, s, p) % p
-            condition_2 = pow(g, hash_again, p)
-        else:
-            condition_1 = pow(y, r, p) * pow(r, s, p) % p
-            condition_2 = pow(g, M, p)
+        condition_1 = pow(y, r, p) * pow(r, s, p) % p
+        condition_2 = pow(g, hash_again, p)
         if condition_1 == condition_2:
             print(f'Верная подпись {ok} {condition_1} = {condition_2}')
             if key == 'secret':
-                secret_message = pow(s, -1, p - 1) * pow((M - x * r), 1, p - 1) % (p - 1)
+                secret_message = pow(s, -1, p - 1) * pow((hash_ - x * r), 1, p - 1) % (p - 1)
                 print(f"Получаем скрытое сообщение: {secret_message}")
                 return secret_message
         else:
@@ -321,7 +328,7 @@ def second_alogrithm_hash(p, message):
     h_0 = len(str(message))
     h_current = str(message)
     for i in range(len(str(message))):
-        h_now = h_current[i]
-        h_result = pow(int(h_now) + 2 * h_0 + 1, 2, p - 1)
+        h_now = int(h_current[i])
+        h_result = pow(h_now + 2 * h_0 + 1, 2, p - 1)
         h_0 = h_result
     return h_result + 1
