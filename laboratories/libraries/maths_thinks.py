@@ -225,8 +225,8 @@ def hash_p_x_g_r_s_simple_generate(k, text):
     p, x, g, r, s, hash_ = 0, 0, 0, 0, 0, 0
     while gcd(k, p) != 1 or gcd(hash_, p) != 1 or not check_prime(p) or gcd(s, p - 1) != 1 or gcd(k, p - 1) != 1:
         p = generate_simple_number_p(4)
-        hash_ = second_alogrithm_hash(text, p)
         if gcd(k, p - 1) == 1:
+            hash_ = second_alogrithm_hash(text, p)
             x = randint(2, p - 3)
             g = find_primitive_root(p)
             r = pow(g, k, p)
