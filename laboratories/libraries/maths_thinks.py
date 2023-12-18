@@ -311,7 +311,6 @@ def check_sign_and_secret_messg(hash_, hash_again, y, r, p, s, g, key, x=0):
             print(f'{condition_1} != {condition_2}')
     else:
         print("Неверная цифровая подпись")
-    pass
 
 
 def first_algorithm_hash(message, p, alphabet):
