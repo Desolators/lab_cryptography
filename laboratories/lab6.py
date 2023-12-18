@@ -28,7 +28,9 @@ if __name__ == "__main__":
                                        key=k1)
     crypto.separate()
     print("Теперь делаем передачу закрытого сообщения используя подпись(со случайно сгенерированными значениями): ")
-    secret = 102451
+    secret = randint(10, 10_000_000)
+    while secret % 2 != 1:
+        secret = randint(10, 10_000_000)
     M = randint(2, secret - 2)
     y1, r1, p1, s1, x1, g1, k1, hash_5 = crypto.create_sign(key='secret', k=secret, text=M)
     print('Теперь проверим подпись (и найдем секретное сообщение)')
