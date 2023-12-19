@@ -80,7 +80,7 @@ def open_key_search(fn):
 
 
 def alg_fact_ferma(N):
-    assert N % 2 == 1
+    assert N % 2
     a_square = ceil(sqrt(N))
     while sqrt((a_square * a_square) - N) % 1 > 0:
         a_square += 1
@@ -251,7 +251,7 @@ def create_sign(p=0, x=0, g=0, k=0, text=0, key=0, dictionary=0, hash_=0):
     separate()
     y, r, s = 0, 0, 0
     # Задаем стартовые значения (формируем ключи)
-    if g == 0 and key == 'no_secret':  # при этом условии включаем генератор и используем без секретного сообщения
+    if not g and key == 'no_secret':  # при этом условии включаем генератор и используем без секретного сообщения
         p, x = generate_p_x()
         g = find_primitive_root(p)
         y = create_y(g, x, p)
@@ -259,13 +259,13 @@ def create_sign(p=0, x=0, g=0, k=0, text=0, key=0, dictionary=0, hash_=0):
         r = pow(g, k, p)
         hash_ = first_algorithm_hash(text, p, dictionary)
         s = (hash_ - x * r) * pow(k, -1, p - 1) % (p - 1)
-    elif g != 0 and key == 'no_secret':  # при этом условии стартовые значения подаются из входа функции
+    elif g and key == 'no_secret':  # при этом условии стартовые значения подаются из входа функции
         y = create_y(g, x, p)
         r = pow(g, k, p)
         s = (hash_ - x * r) * pow(k, -1, p - 1) % (p - 1)
-    if g == 0 and key == 'secret':  # включаем генератор и используем в качестве K - секретное сообщение
+    if not g and key == 'secret':  # включаем генератор и используем в качестве K - секретное сообщение
         secrets = k
-        if p == 0:
+        if not p:
             generator = hash_p_x_g_r_s_simple_generate(secrets, text)
             p, x, g, r, s, hash_ = generator
         else:
@@ -273,7 +273,7 @@ def create_sign(p=0, x=0, g=0, k=0, text=0, key=0, dictionary=0, hash_=0):
             x, g, r, s, hash_ = generator
         y = create_y(g, x, p)
         print(f"Скрытое сообщние = {secrets}")
-    elif g != 0 and key == 'secret':  # при этом условии берем значения из входа функции
+    elif g and key == 'secret':  # при этом условии берем значения из входа функции
         secrets = k
         y = create_y(g, x, p)
         r = pow(g, secrets, p)
