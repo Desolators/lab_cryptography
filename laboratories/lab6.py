@@ -1,6 +1,6 @@
 from random import randint
 
-from laboratories.libraries import maths_thinks as crypto
+from libraries import maths_thinks as crypto
 
 if __name__ == "__main__":
     crypto.separate()
