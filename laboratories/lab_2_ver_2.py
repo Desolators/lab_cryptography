@@ -21,10 +21,9 @@ list_of_nested_dictionaries = [deepcopy(dict_alp) for dictionary in range(key)]
 lens = [0] * key
 for i in range(len(shifr)):
     column_number = i % key
-    current_element = str(shifr[i])
-    if shifr[i]:
-        list_of_nested_dictionaries[column_number][current_element][0] += 1
-        lens[column_number] += 1
+    current_element = shifr[i]
+    list_of_nested_dictionaries[column_number][current_element][0] += 1
+    lens[column_number] += 1
 freq = [list(list_of_nested_dictionaries[dictionary].values()) for dictionary in range(key)]
 count_sdvig = [[0] for i in range(key - 1)]
 umnoz_so_sdvigom = [[0] * len(dict_alp) for i in range(key)]
